@@ -1,0 +1,22 @@
+.SiteLogo {
+  height: 80px;
+  width: 80px;
+  cursor: pointer;
+  border-radius: 40px;
+}
+#nav_bar {
+  /* background: linear-gradient(to right, #ff66ff 0%, #99ccff 100%); */
+  background-image: linear-gradient(to right, #ff66ff 0%, #99ccff 100%);
+  
+}
+.navbar-nav li a {
+  font-size: 20px;
+  font-weight: 600;
+}
+.navbar-nav li {
+  padding: 0px 10px;
+}
+.btn_border {
+  border-radius: 20px;
+padding: 0px 30px 0px 30px;
+}

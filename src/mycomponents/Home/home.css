@@ -1,0 +1,116 @@
+#banner1 {
+  background: linear-gradient(to bottom right, #ff66ff 0%, #99ccff 100%);
+  color: white;
+  padding-top: 5%;
+}
+.promo_title {
+  font-size: 40px;
+  font-weight: 600;
+  /* margin-top: 100px; */
+}
+.location_icon {
+  width: 60px;
+  margin: 10px;
+}
+#banner1 a {
+  text-decoration: none;
+  color: white;
+}
+.firstWave {
+  width: 100%;
+}
+.service_img {
+  padding: 30px 0px;
+  width: 130px;
+  height: 170px;
+ margin: auto;
+}
+.offer {
+  padding: 20px;
+}
+.TitleOffer::after {
+  border-radius: 20px;
+  content: " ";
+  background: linear-gradient(to bottom right, #ff66ff 0%, #99ccff 100%);
+  width: 300px;
+  height: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.TitleOffer::before {
+  border-radius: 20px;
+  content: " ";
+  background: linear-gradient(to bottom right, #ff66ff 0%, #99ccff 100%);
+  width: 90px;
+  height: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  transform: translateY(31px);
+}
+#banner2 {
+  padding: 80px 0px;
+}
+#banner2 .btn-primary {
+  box-shadow: none;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  background-image: linear-gradient(to bottom right, #ff66ff 0%, #99ccff 100%);
+}
+/* #f8f9fa */
+.banner3 {
+  background: #c0a5ff;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+.banner3 ul li {
+  margin: 10px 0px;
+  font-size: 20px;
+}
+
+#banner4{
+  padding: 80px 0px;
+ 
+  background: #f8f9fa ;
+  
+}
+.testiminal{
+  border-left:  4px solid #7b1798;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.testiminal img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin:  0 10px;
+}
+.user_details{
+  display: inline-block;
+  font-size: 12px;
+
+}
+.offer:hover{
+  border-radius: 10px;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+ 
+}
+#CardBannar::before {
+background-image: url("../../images/worldBgImage.png");
+background-position: top;
+background-repeat: no-repeat;
+background-size: cover;
+position: absolute;
+content: '';
+/* top: 0;
+left: 0; */
+width: 100%;
+height: 60%;
+opacity: 0.15;
+
+}
+#CardBannar{
+  padding: 80px 0px;
+}
