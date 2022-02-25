@@ -50,7 +50,8 @@
   transform: translateY(31px);
 }
 #banner2 {
-  padding: 80px 0px;
+ padding-top: 40px;
+ padding-bottom: 40px;
 }
 #banner2 .btn-primary {
   box-shadow: none;
@@ -97,20 +98,26 @@
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
  
 }
-#CardBannar::before {
-background-image: url("../../images/worldBgImage.png");
-background-position: top;
-background-repeat: no-repeat;
-background-size: cover;
-position: absolute;
-content: '';
-/* top: 0;
-left: 0; */
-width: 100%;
-height: 60%;
-opacity: 0.15;
+  #banner2{
+    position: relative;
+  }
+  #banner2::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../images/worldBgImage.png");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+  }
+  #carouselSection{
+    background-color: rgba(241, 202, 73, 0.979);
+    padding-top: 20px;
+    padding-bottom: 20px;
 
-}
-#CardBannar{
-  padding: 80px 0px;
-}
+  }
+  

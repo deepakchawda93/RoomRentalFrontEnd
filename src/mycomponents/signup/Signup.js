@@ -17,18 +17,24 @@ const Signup = () => {
     Password: "",
     ConformPassword: "",
     FirstName: "",
-    LastName :""
+    LastName: "",
+    role: ""
   });
   const handleChangeLogin = (e) => {
     const { name, value } = e.target;
     setSignUp({ ...signUp, [name]: value });
   };
+
   const submitSignUp = async (event) => {
     // event.preventDefault();
     try {
       setLoader(true);
       if (
-        signUp.Email == ""||signUp.Password == "" ||signUp.ConformPassword == ""||signUp.FirstName == "" ||signUp.LastName == ""  
+        signUp.Email == "" ||
+        signUp.Password == "" ||
+        signUp.ConformPassword == "" ||
+        signUp.FirstName == "" ||
+        signUp.LastName == ""||signUp.role == ""
       ) {
         setLoader(false);
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
@@ -38,13 +44,14 @@ const Signup = () => {
         "https://localhost:44380/Registration",
         signUp
       );
-
+      console.log("eroorr", responce);
       if (responce.data.success == true) {
         setLoader(false);
         history.push("/login");
         toast.success(`✔ ${responce.data.msg}`, { theme: "colored" });
       } else {
         setLoader(false);
+
         setErrorMsg(responce.data.error[0].description);
       }
     } catch (error) {
@@ -101,69 +108,45 @@ const Signup = () => {
                                 justifyContent: "center",
                                 alignItems: "center",
                               }}
-                            >
-                              <i class="fas fa-exclamation-triangle fa-2x"> </i>{" "}
-                              {ErrorMsg} <br />
+                            ><i class="fas fa-exclamation-triangle fa-1x"> </i> {ErrorMsg} <br />
+                              
                             </p>
                           </div>
                         </>
                       )}
 
-                      {/* <div class="row">
-                        <div class="col-md-6 mb-4"> */}
-                      {/* <div class="form-outline">
-                        <input
-                          type="text"
-                          id="form3Example1m"
-                          class="form-control form-control-lg"
-                        />
-                        <label class="form-label" for="form3Example1m">
-                          First name
-                        </label>
-                      </div>
-
-                      <div class="form-outline">
-                        <input
-                          type="text"
-                          id="form3Example1n"
-                          class="form-control form-control-lg"
-                        />
-                        <label class="form-label" for="form3Example1n">
-                          Last name
-                        </label>
-                      </div> */}
                       <div className="row">
                         <div className="col-md-6">
-                        <div class="form-outline mb-2">
-                        <input
-                          type="text"
-                          id="form3Example978"
-                          name="FirstName"
-                          value={signUp.FirstName}
-                          onChange={handleChangeLogin}
-                          class="form-control form-control-lg"
-                          placeholder="FirstName "
-                        />
-                        <label class="form-label" for="form3Example978">
-                          First name
-                        </label>
-                      </div>
+                          <div class="form-outline mb-2">
+                            <input
+                              type="text"
+                              id="form3Example978"
+                              name="FirstName"
+                              value={signUp.FirstName}
+                              onChange={handleChangeLogin}
+                              class="form-control form-control-lg"
+                              placeholder="FirstName "
+                            />
+                            <label class="form-label" for="form3Example978">
+                              First name
+                            </label>
+                          </div>
                         </div>
                         <div className="col-md-6">
-                        <div class="form-outline mb-2">
-                        <input
-                          type="lastName"
-                          id="form3Example979"
-                          name="LastName"
-                          value={signUp.LastName}
-                          onChange={handleChangeLogin}
-                          class="form-control form-control-lg"
-                          placeholder="LastName "
-                        />
-                        <label class="form-label" for="form3Example979">
-                        Last name
-                        </label>
-                      </div>
+                          <div class="form-outline mb-2">
+                            <input
+                              type="lastName"
+                              id="form3Example979"
+                              name="LastName"
+                              value={signUp.LastName}
+                              onChange={handleChangeLogin}
+                              class="form-control form-control-lg"
+                              placeholder="LastName "
+                            />
+                            <label class="form-label" for="form3Example979">
+                              Last name
+                            </label>
+                          </div>
                         </div>
                       </div>
                       <div class="form-outline mb-2">
@@ -208,6 +191,38 @@ const Signup = () => {
                         <label class="form-label" for="form3Example1m1">
                           Conform Password
                         </label>
+                      </div>
+                     
+                      <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                        <h6 class="mb-0 me-4">User Type: </h6>
+
+                        <div class="form-check form-check-inline mb-0 me-4">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="role"
+                            id="UserTypeuser"
+                            onChange={handleChangeLogin}
+                            value="user"
+                          />
+                          <label class="form-check-label" for="UserTypeuser">
+                            User
+                          </label>
+                        </div>
+
+                        <div class="form-check form-check-inline mb-0 me-4">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="role"
+                            id="userTypeOwner"
+                            onChange={handleChangeLogin}
+                            value="owner"
+                          />
+                          <label class="form-check-label" for="userTypeOwner">
+                            Owner
+                          </label>
+                        </div>
                       </div>
 
                       <div className="row g-3">

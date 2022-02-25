@@ -1,83 +1,136 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import RoomImage from "../../images/RoomImage.jpg";
+import React from "react";
+import newImage from "../../images/RoomImage.jpg";
+import newImage2 from "../../images/RoomImage2.jpg";
 
-
-
-export default function ImgMediaCard() {
+const RoomDataCard = () => {
   return (
-    <div className=" container">
-      <div className="row">
-        <Card sx={{ maxWidth: 345 }} >
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image={RoomImage}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-        <Card sx={{ maxWidth: 345 }}>
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image={RoomImage}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-        <Card sx={{ maxWidth: 345 }}>
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image={RoomImage}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-      
+    <>
+      <div class="card p-0" style={{ width: "20rem" }}>
+        {/* col-md-6 col-xl-3 col-lg-4 p-0 */}
+        <img src={newImage} class="card-img-top w-100 hover-zoom"  style={{ maxHeight : "15rem" }} alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Price 5000</h5>
+          <p class="card-text">
+            2BHK only for student not for family and live only 3 student this is
+            best room for living and
+          </p>
+          <div className="d-grid gap-2 d-md-block">
+            <button type="button" className="btn btn-warning me-2 ">
+              Add to card 
+            </button>
+            <button type="button" class="btn btn-warning me-2">
+              More Details <i class="fas fa-angle-double-right"></i>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+      <div
+        class="card col-md-6 col-xl-3 col-lg-4 p-0 "
+        style={{ width: "20rem" }}
+      >
+        <img src={newImage2} class="card-img-top col-md-12" style={{ maxHeight : "15rem"}}  alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Price 5000</h5>
+          <p class="card-text">
+          2BHK only for student not for family and live only 3 student this is
+            best room for living and 
+          </p>
+          <div className="d-grid gap-2 d-md-block">
+            <button type="button" className="btn btn-warning me-2 ">
+              Add to card
+            </button>
+            <button type="button" class="btn btn-warning">
+              More Details <i class="fas fa-angle-double-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card p-0" style={{ width: "20rem" }}>
+        {/* col-md-6 col-xl-3 col-lg-4 p-0 */}
+        <img src={newImage} class="card-img-top w-100 hover-zoom"  style={{ maxHeight : "15rem" }} alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Price 5000</h5>
+          <p class="card-text">
+            2BHK only for student not for family and live only 3 student this is
+            best room for living and
+          </p>
+          <div className="d-grid gap-2 d-md-block">
+            <button type="button" className="btn btn-warning me-2 ">
+              Add to card 
+            </button>
+            <button type="button" class="btn btn-warning me-2">
+              More Details <i class="fas fa-angle-double-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card col-md-6 col-xl-3 col-lg-4 p-0 "
+        style={{ width: "20rem" }}
+      >
+        <img src={newImage2} class="card-img-top col-md-12" style={{ maxHeight : "15rem"}}  alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Price 5000</h5>
+          <p class="card-text">
+          2BHK only for student not for family and live only 3 student this is
+            best room for living and 
+          </p>
+          <div className="d-grid gap-2 d-md-block">
+            <button type="button" className="btn btn-warning me-2 ">
+              Add to card
+            </button>
+            <button type="button" class="btn btn-warning">
+              More Details <i class="fas fa-angle-double-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card p-0" style={{ width: "20rem" }}>
+        {/* col-md-6 col-xl-3 col-lg-4 p-0 */}
+        <img src={newImage} class="card-img-top w-100 hover-zoom"  style={{ maxHeight : "15rem" }} alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Price 5000</h5>
+          <p class="card-text">
+            2BHK only for student not for family and live only 3 student this is
+            best room for living and
+          </p>
+          <div className="d-grid gap-2 d-md-block">
+            <button type="button" className="btn btn-warning me-2 ">
+              Add to card 
+            </button>
+            <button type="button" class="btn btn-warning me-2">
+              More Details <i class="fas fa-angle-double-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card col-md-6 col-xl-3 col-lg-4 p-0 "
+        style={{ width: "20rem" }}
+      >
+        <img src={newImage2} class="card-img-top col-md-12" style={{ maxHeight : "15rem"}}  alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Price 5000</h5>
+          <p class="card-text">
+          2BHK only for student not for family and live only 3 student this is
+            best room for living and 
+          </p>
+          <div className="d-grid gap-2 d-md-block">
+            <button type="button" className="btn btn-warning me-2 ">
+              Add to card
+            </button>
+            <button type="button" class="btn btn-warning">
+              More Details <i class="fas fa-angle-double-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+    
+    </>
   );
-}
+};
+
+export default RoomDataCard;

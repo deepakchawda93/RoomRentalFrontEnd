@@ -1,15 +1,16 @@
 import { Email, Password } from "@mui/icons-material";
 import axios from "axios";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import {FirebaseLoginFun} from "../FirebaseLogin/FireBaseLogin"
 
 import loginImg from "../../images/loginImg.svg";
 import "../Login/login.css";
 
 const Login = () => {
   let history = useHistory();
-  const[ErrorMsg,setErrorMsg]= useState()
+  const [ErrorMsg, setErrorMsg] = useState();
 
   const [isLoader, setLoader] = useState(false);
   const [Login, setLogin] = useState({
@@ -33,30 +34,28 @@ const Login = () => {
       }
       const responce = await axios.post("https://localhost:44380/login", Login);
       console.log("res display", responce);
-      if(responce.data.isSuccess==true)
-      {
+      if (responce.data.isSuccess == true) {
         setLoader(false);
-      if (!responce.data.token) {
-        history.push("login");
-      }
-      localStorage.setItem("token", JSON.stringify(responce.data.token));
-      localStorage.setItem(
-        "userDetails",
-        JSON.stringify(responce.data.userEmail)
-      );
-      history.push("/");
-      toast.success("✔ User Login Successfully!", { theme: "colored" });
-
-      }
-      else{
-        setLoader(false);
-        setErrorMsg(responce.data.errors)
-      }
+        if (!responce.data.token) {
+          history.push("login");
+        }
+        localStorage.setItem("token", JSON.stringify(responce.data.token));
+        localStorage.setItem(
+          "userDetails",
+          JSON.stringify(responce.data)
+        );
+        toast.success("✔ User Login Successfully!", { theme: "colored" });
+        history.push("/");
+        localStorage.setItem("isLogin" ,true)
       
+      } else {
+        setLoader(false);
+        setErrorMsg(responce.data.errors);
+      }
     } catch (error) {
       console.log("error", error.responce);
       setLoader(false);
-      toast.error("something went wrong !", { theme: "colored" });
+      toast.error("Your server is not responding !", { theme: "colored" });
     }
   };
   return (
@@ -72,35 +71,36 @@ const Login = () => {
                 <div class="card-body">
                   <h5 class="card-title text-center">LOGIN FORM</h5>
                   {!ErrorMsg ? (
-                        " "
-                      ) : (
-                        <>
-                          <div
-                            class="alert alert-danger d-flex align-items-center p-1"
-                            role="alert"
-                          >
-                            <svg
-                              class="bi flex-shrink-0 me-2"
-                              width="5"
-                              height="5"
-                              role="img"
-                              aria-label="Danger:"
-                            ></svg>
-                            <p
-                              className="mb-0"
-                              style={{
-                                textAlign: "center",
-                                color: "red",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                              }}
-                            >
-                              <i class="fas fa-exclamation-triangle "></i> {ErrorMsg}
-                            </p>
-                          </div>
-                        </>
-                      )}
+                    " "
+                  ) : (
+                    <>
+                      <div
+                        class="alert alert-danger d-flex align-items-center p-1"
+                        role="alert"
+                      >
+                        <svg
+                          class="bi flex-shrink-0 me-2"
+                          width="5"
+                          height="5"
+                          role="img"
+                          aria-label="Danger:"
+                        ></svg>
+                        <p
+                          className="mb-0"
+                          style={{
+                            textAlign: "center",
+                            color: "red",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <i class="fas fa-exclamation-triangle "></i>{" "}
+                          {ErrorMsg}
+                        </p>
+                      </div>
+                    </>
+                  )}
                   <form
                     class="row g-3"
                     onSubmit={(event) => {
@@ -189,10 +189,13 @@ const Login = () => {
                     <p className=" text-center py-2 p-0 m-0">
                       ___________OR___________
                     </p>
-
+                  </form>
+                  <div class="row g-3">
                     <div className=" col-md-6 text-center">
                       <div class="d-grid ">
-                        <button class="btn btn-danger" type="submit">
+                        <button class="btn btn-danger" type="submit" onClick={()=>{
+                          FirebaseLoginFun();
+                        }}>
                           <i className="fab fa-google-plus-g "></i> Login with
                           Google+
                         </button>
@@ -206,7 +209,7 @@ const Login = () => {
                         </button>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
