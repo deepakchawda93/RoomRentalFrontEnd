@@ -15,6 +15,7 @@
 #banner1 a {
   text-decoration: none;
   color: white;
+
 }
 .firstWave {
   width: 100%;
@@ -114,6 +115,7 @@
     background-repeat: no-repeat;
     opacity: 0.15;
   }
+
   #carouselSection{
     background-color: rgba(241, 202, 73, 0.979);
     padding-top:30px;
