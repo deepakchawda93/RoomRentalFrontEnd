@@ -63,7 +63,7 @@ const Signup = () => {
     <>
       <section id="signupform" className="d-flex align-items-center">
         <div class="container d-flex justify-content-center">
-          <div class="row ">
+          <div class="row">
             <div
               class="card card-registration my-4"
               style={{ maxWidth: "1277px" }}

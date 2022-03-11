@@ -15,7 +15,7 @@ const Header = () => {
   }, []);
 
   const Logoutfun = () => {
-    if (window.confirm("Do You want to delete!")) {
+    if (window.confirm("Do You want to Logout!")) {
       localStorage.clear();
       history.push("/")
     }
@@ -56,7 +56,7 @@ const Header = () => {
                       <li className="nav-item">
                         <Link
                           to="/"
-                          className="nav-link active"
+                          className="nav-link"
                           aria-current="page"
                         >
                           Home
@@ -66,7 +66,7 @@ const Header = () => {
                       <li className="nav-item">
                         <Link
                           to="/Contact"
-                          className="nav-link active"
+                          className="nav-link "
                           aria-current="page"
                         >
                           Contact
@@ -77,16 +77,17 @@ const Header = () => {
                           <li className="nav-item">
                             <Link
                               to="/login"
-                              className="nav-link active"
+                              className="nav-link "
                               aria-current="page"
                             >
                               Login
                             </Link>
                           </li>
 
-                          <li className="nav-item">
+                          <li className="">
+                          {/* nav-item */}
                             <Link
-                              className="nav-link active"
+                              className="btn btn-outline-success"
                               aria-current="page"
                               to="/signup"
                             >
@@ -99,11 +100,24 @@ const Header = () => {
                         <>
                           <li className="nav-item">
                             <Link
-                              className="nav-link active"
+                              className="nav-link "
                               aria-current="page"
                               to="/userWishlist"
                             >
                               Wishlist
+                            </Link>
+                          </li>
+                        </>
+                      )}
+                       {checkLogin?.role == "owner" && (
+                        <>
+                          <li className="nav-item">
+                            <Link
+                              className="nav-link"
+                              aria-current="page"
+                              to="/OwnerAccount"
+                            >
+                              Add Room
                             </Link>
                           </li>
                         </>
@@ -142,9 +156,17 @@ const Header = () => {
                               </li>
                               <li><hr class="dropdown-divider"/></li>
                               <li>
-                                <Link class="dropdown-item"  to="/userAccount">
+                                {checkLogin?.role == "user"?(<>
+                                  <Link class="dropdown-item"  to="/userAccount">
                                   <i class="fas fa-user-circle"></i> Account
                                 </Link>
+                                </>):(<>
+                                  <Link class="dropdown-item"  to="/OwnerAccount">
+                                  <i class="fas fa-user-circle"></i> Account
+                                </Link>
+
+                                </>)}
+                              
                               </li>
                               
                               <li

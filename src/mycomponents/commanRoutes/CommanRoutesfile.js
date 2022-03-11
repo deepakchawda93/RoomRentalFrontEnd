@@ -7,7 +7,8 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import SearchPage from "../SearchPage/SearchPage";
 import Signup from "../signup/Signup";
-import UserAccount from "../userPages/UserAccount";
+import UserAccount from "../OwnerPages/OwnerAccount";
+import OwnerAccount from "../OwnerPages/OwnerAccount";
 import UserWishlist from "../userPages/UserWishlist";
 const CommanRoutesfile = () => {
   return (
@@ -25,6 +26,18 @@ const CommanRoutesfile = () => {
         </Route>
         <Route exact path="/userAccount">
           <UserAccount />
+        </Route>
+        <Route exact path="/OwnerAccount">
+          <OwnerAccount/>
+        </Route>
+        <Route exact path="/OwnerAccount/profile">
+          <OwnerAccount/>
+        </Route>
+        <Route exact path="/OwnerAccount/pendingData">
+          <OwnerAccount/>
+        </Route>
+        <Route exact path="/OwnerAccount/successData">
+          <OwnerAccount/>
         </Route>
         <Route exact path="/userWishlist">
           <UserWishlist />

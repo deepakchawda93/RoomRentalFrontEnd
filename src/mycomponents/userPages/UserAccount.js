@@ -26,7 +26,7 @@ const UserAccount = () => {
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                   </Link>
                   <Link
-                    to="/user/profile"
+                    to="/Owner/profile"
                     class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
                   >
                     <i class="far fa-id-badge"></i> Profile
@@ -47,7 +47,12 @@ const UserAccount = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-10">all pages</div>
+            <div className="col-md-10">
+            {/* <Route exact path="/userAccount">
+          <UserAccount />
+        </Route> */}
+              
+              </div>
           </div>
         </div>
       </div>

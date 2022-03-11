@@ -5,7 +5,7 @@ const AdminHome = () => {
   return (
     <>
       <div class="d-flex" id="wrapper">
-        {/* <!-- Sidebar --> */}
+
         <div class="bg-white" id="sidebar-wrapper">
           <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
           <i class="fas fa-house-user me-2"></i>
@@ -68,8 +68,6 @@ const AdminHome = () => {
             </a>
           </div>
         </div>
-        {/* <!-- /#sidebar-wrapper -->
-        <!-- Page Content --> */}
         <div id="page-content-wrapper">
           <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
             <div class="d-flex align-items-center">
@@ -264,8 +262,6 @@ const AdminHome = () => {
           </div>
         </div>
       </div>
-
-      {/* // <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script> */}
     </>
   );
 };

@@ -7,13 +7,11 @@
 #nav_bar {
   /* background: linear-gradient(to right, #ff66ff 0%, #99ccff 100%); */
   background-image: linear-gradient(to right, #ff66ff 0%, #99ccff 100%);
-
-
-  
 }
 .navbar-nav li a {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 800;
+  color: black !important;
 }
 .navbar-nav li {
   padding: 0px 10px;
@@ -25,4 +23,13 @@ padding: 0px 30px 0px 30px;
 .UserAccount{
   height: 50px;
   border-radius: 30px;
+}
+.nav-item:hover{
+  background-color: rgba(151, 236, 201, 0.712);
+  color: white !important;
+  border-radius: 10px;
+  transition: 0.7s;
+}
+.dropdown-menu.show{
+  transition: 1.9s !important;
 }

@@ -109,7 +109,7 @@ const Footer = () => {
           </div>
          
         </div>
-
+        <hr class="dropdown-divider"/>
         <div class="footer-bottom">
           <div class="container">
             <div class="row text-center">
