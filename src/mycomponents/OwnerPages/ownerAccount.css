@@ -72,6 +72,11 @@
   font-weight: bold;
   border: none;
 }
+.btn-close:hover{
+  background-color: red !important;
+  color: black !important;
+  transition: 0.7s;
+}
 
 @media (min-width: 768px) {
   #sidebar-wrapper {

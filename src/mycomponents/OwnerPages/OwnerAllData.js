@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../OwnerPages/ownerAccount.css";
 import newImage from "../../images/RoomImage.jpg";
+import OwnerAddRoomModal from "./OwnerAddRoomModal";
+import axios from "axios";
 const OwnerAllData = () => {
+  const OwnerDetailes = JSON.parse(localStorage.getItem("userDetails"));
+  const Userid = OwnerDetailes.userId
+
+  useEffect(() => {
+    GetOwnerAllData();
+  }, []);
+  const GetOwnerAllData = async () => {
+    try {
+      const res = await axios.get(
+        `https://localhost:44380/getOwnerData/${Userid}`
+      );
+      console.log("res data ", res);
+    } catch (error) {
+      console.log("error", error.res);
+    }
+  };
   return (
     <>
       <div class="container-fluid px-4">
@@ -45,8 +63,19 @@ const OwnerAllData = () => {
             </div>
           </div>
         </div>
+        <div className="shadow p-3 bg-white rounded-3">
+          <button
+            className="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Add Room <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
 
-        <div className="row gap-5 justify-content-center justify-content-lg-start my-5">
+        <OwnerAddRoomModal />
+
+        <div className="row gap-5 justify-content-center justify-content-lg-start my-3">
           <h3 class="fs-4 mb-3">All Owner data</h3>
           <div class="card shadow m-2 p-0 m-2" style={{ width: "20rem" }}>
             <img

@@ -91,7 +91,7 @@ const Home = () => {
   };
 
   var localUserData = JSON.parse(localStorage.getItem("userDetails"));
-  console.log(localUserData);
+  // console.log(localUserData);
   const SearchFuntion = () => {
     debugger;
     if (localUserData.role == "user" || localUserData.role == "owner") {

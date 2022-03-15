@@ -7,7 +7,7 @@ const Header = () => {
   let history = useHistory();
   const [checkLogin, setCheckLogin] = useState(null);
 
-  const [isLogin , setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(false);
   // console.log(checkLogin?.role);
   useEffect(() => {
     setCheckLogin(JSON.parse(localStorage.getItem("userDetails")));
@@ -15,10 +15,8 @@ const Header = () => {
   }, []);
 
   const Logoutfun = () => {
-    if (window.confirm("Do You want to Logout!")) {
-      localStorage.clear();
-      history.push("/")
-    }
+    localStorage.clear();
+    history.push("/");
   };
 
   return (
@@ -54,11 +52,7 @@ const Header = () => {
                   >
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                       <li className="nav-item">
-                        <Link
-                          to="/"
-                          className="nav-link"
-                          aria-current="page"
-                        >
+                        <Link to="/" className="nav-link" aria-current="page">
                           Home
                         </Link>
                       </li>
@@ -85,7 +79,7 @@ const Header = () => {
                           </li>
 
                           <li className="">
-                          {/* nav-item */}
+                            {/* nav-item */}
                             <Link
                               className="btn btn-outline-success"
                               aria-current="page"
@@ -109,7 +103,7 @@ const Header = () => {
                           </li>
                         </>
                       )}
-                       {checkLogin?.role == "owner" && (
+                      {checkLogin?.role == "owner" && (
                         <>
                           <li className="nav-item">
                             <Link
@@ -148,37 +142,101 @@ const Header = () => {
                               class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end"
                               aria-labelledby="dropdownMenuButton1"
                             >
-                            <li>
+                              <li>
                                 <p class="dropdown-item-text">
-                                {/* <i class="fas fa-envelope"></i> */}
+                                  {/* <i class="fas fa-envelope"></i> */}
                                   {checkLogin.userData[0]}
                                 </p>
                               </li>
-                              <li><hr class="dropdown-divider"/></li>
                               <li>
-                                {checkLogin?.role == "user"?(<>
-                                  <Link class="dropdown-item"  to="/userAccount">
-                                  <i class="fas fa-user-circle"></i> Account
-                                </Link>
-                                </>):(<>
-                                  <Link class="dropdown-item"  to="/OwnerAccount">
-                                  <i class="fas fa-user-circle"></i> Account
-                                </Link>
-
-                                </>)}
-                              
+                                <hr class="dropdown-divider" />
                               </li>
-                              
-                              <li
-                                onClick={() => {
-                                  Logoutfun();
-                                }}
-                              >
-                                <a class="dropdown-item" href="#">
+                              <li>
+                                {checkLogin?.role == "user" ? (
+                                  <>
+                                    <Link
+                                      class="dropdown-item"
+                                      to="/userAccount"
+                                    >
+                                      <i class="fas fa-user-circle"></i> Account
+                                    </Link>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Link
+                                      class="dropdown-item"
+                                      to="/OwnerAccount"
+                                    >
+                                      <i class="fas fa-user-circle"></i> Account
+                                    </Link>
+                                  </>
+                                )}
+                              </li>
+
+                              <li>
+                                <a
+                                  class="dropdown-item"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#exampleModal2"
+                                >
                                   <i class="fas fa-power-off"></i> Logout
                                 </a>
                               </li>
                             </ul>
+                          </div>
+
+                          {/* <!-- Modal conform Logout  --> */}
+                          <div
+                            class="modal"
+                            id="exampleModal2"
+                            // tabindex="-1"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="exampleModalLabel"
+                                  >
+                                    Are you sure
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                  <i
+                                    class="fa-solid fa-circle-exclamation"
+                                    style={{ fontSize: "48px", color: "red" }}
+                                  ></i>
+                                  <h2> You want to Logout</h2>
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    No
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-success"
+                                    data-bs-dismiss="modal"
+                                    onClick={() => {
+                                      Logoutfun();
+                                    }}
+                                  >
+                                    Yes
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </>
                       ) : (
