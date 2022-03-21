@@ -15,12 +15,7 @@ const OwnerAccount = () => {
   const toggleClass = () => {
     setActive(!isActive);
   };
-  const Logoutfun = () => {
-    if (window.confirm("Do You want to Logout!")) {
-      localStorage.clear();
-      history.push("/");
-    }
-  };
+
 
   return (
     <>
@@ -57,9 +52,8 @@ const OwnerAccount = () => {
               <i class="fas fa-cart-plus"></i> Success Data
             </Link>
             <Link
-              onClick={() => {
-                Logoutfun();
-              }}
+               data-bs-toggle="modal"
+               data-bs-target="#exampleModal2"
               class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
             >
               <i class="fas fa-power-off me-2"></i>Logout

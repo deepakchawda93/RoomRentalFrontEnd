@@ -7,6 +7,7 @@ import axios from "axios";
 const OwnerAllData = () => {
   const OwnerDetailes = JSON.parse(localStorage.getItem("userDetails"));
   const [allOwnerData, setAllOwnerData] = useState();
+
   const [isLoader, setIsLoader] = useState(false);
   const Userid = OwnerDetailes.userId;
   const token = OwnerDetailes.token;
@@ -27,8 +28,8 @@ const OwnerAllData = () => {
         }
       );
       setAllOwnerData(res.data.data);
-      setIsLoader(true);
-      console.log("res data ", res);
+      setIsLoader(false);
+      console.log("res data ", res.data.data);
     } catch (error) {
       console.log("error", error.res);
     }
@@ -42,7 +43,7 @@ const OwnerAllData = () => {
           <div class="col-md-3">
             <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                {/* <h3 class="fs-2">{TotalData}</h3> */}
+                <h3 class="fs-2">{allOwnerData?.totalCount}</h3>
                 <p class="fs-5">Total</p>
               </div>
               <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -52,29 +53,29 @@ const OwnerAllData = () => {
           <div class="col-md-3">
             <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 class="fs-2">4920</h3>
+                <h3 class="fs-2">{allOwnerData?.pendingCount}</h3>
                 <p class="fs-5">Pending</p>
               </div>
-              <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+              <i class="fa-regular fa-hourglass fs-1 primary-text border rounded-full secondary-bg p-3"></i>
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 class="fs-2">3899</h3>
+                <h3 class="fs-2">{allOwnerData?.successCount}</h3>
                 <p class="fs-5">Success</p>
               </div>
-              <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+              <i class="fa-solid fa-clipboard-check fa-3x primary-text border rounded-full secondary-bg p-3 "></i>
             </div>
           </div>
           <div class="col-md-3">
             <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 class="fs-2">25</h3>
+                <h3 class="fs-2">{allOwnerData?.rejectedCount}</h3>
                 <p class="fs-5">Rejected</p>
               </div>
-              <i class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+              <i class="fa-solid fa-ban fs-1 primary-text border rounded-full secondary-bg p-3"></i>
             </div>
           </div>
         </div>
@@ -102,8 +103,8 @@ const OwnerAllData = () => {
             </>
           ) : (
             <>
-              {allOwnerData && allOwnerData.length !== 0 ? (
-                allOwnerData.map((item) => {
+              {allOwnerData?.realData && allOwnerData?.realData.length !== 0 ? (
+                allOwnerData?.realData.map((item) => {
                   return (
                     <>
                       <div
@@ -117,10 +118,38 @@ const OwnerAllData = () => {
                           alt="..."
                         />
                         <div class="card-body">
-                          <h5 class="card-title">Price 5000</h5>
+                          <h5 class="card-title">
+                            Price :{" "}
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            {item.price}
+                          </h5>
+                          <p class="card-text">Address : {item.address}</p>
+                          <p class="card-text">City : {item.city}</p>
                           <p class="card-text">
-                            2BHK only for student not for family and live only 3
-                            student this is best room for living and
+                            NumberOfMambers : {item.numberOfMambers}
+                          </p>
+                          <p class="card-text ">
+                            Status :{" "}
+                            <span
+                              // className={
+                              //   item.ownerDataStatus == "rejected"
+                              //     ? "bg-danger text-white px-2 rounded-2"
+                              //     : "" || item.ownerDataStatus == "success"
+                              //     ? "bg-success  text-white px-2 rounded-2"
+                              //     : "" || item.ownerDataStatus == "pending"
+                              //     ? "bg-primary text-white px-2 rounded-2"
+                              //     : ""
+                              // }
+                              className={
+                                item.ownerDataStatus == "rejected"
+                                  ? "bg-danger text-white px-2 rounded-2"
+                                  : item.ownerDataStatus == "success"
+                                  ? "bg-success  text-white px-2 rounded-2"
+                                  : "bg-primary  text-white px-2 rounded-2"
+                              }
+                            >
+                              {item.ownerDataStatus}
+                            </span>
                           </p>
                           <div className="d-grid gap-2 d-md-block">
                             <button
@@ -130,7 +159,7 @@ const OwnerAllData = () => {
                               Edit Data
                             </button>
                             <button type="button" class="btn btn-warning me-2">
-                              More Details{" "}
+                              More Details
                               <i class="fas fa-angle-double-right"></i>
                             </button>
                           </div>
@@ -141,7 +170,7 @@ const OwnerAllData = () => {
                 })
               ) : (
                 <>
-                  <div className="d-flex justify-content-center align-content-center">
+                  <div className="d-flex justify-content-center align-content-center mb-3">
                     <div className="text-center  col-lg-4">
                       <img
                         src={notFountOwnerImg}
@@ -149,6 +178,14 @@ const OwnerAllData = () => {
                         className="img-fluid"
                       />
                       <h4 className="my-4">Not Found any data</h4>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        class="btn btn-outline-info"
+                      >
+                        Add new Data <i class="fa-solid fa-plus"></i>
+                      </button>
                     </div>
                   </div>
                 </>

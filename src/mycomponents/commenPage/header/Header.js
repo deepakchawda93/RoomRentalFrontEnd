@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../header/Header.css";
 import { Link, useHistory } from "react-router-dom";
 import userAccount from "../../../images/userAccountImage.png";
+import LogoutModal from "./LogoutModal";
 
 const Header = () => {
   let history = useHistory();
@@ -14,10 +15,7 @@ const Header = () => {
     // findRoomRentData();
   }, []);
 
-  const Logoutfun = () => {
-    localStorage.clear();
-    history.push("/");
-  };
+ 
 
   return (
     <>
@@ -184,60 +182,7 @@ const Header = () => {
                               </li>
                             </ul>
                           </div>
-
-                          {/* <!-- Modal conform Logout  --> */}
-                          <div
-                            class="modal"
-                            id="exampleModal2"
-                            // tabindex="-1"
-                            aria-labelledby="exampleModalLabel"
-                            aria-hidden="true"
-                          >
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title"
-                                    id="exampleModalLabel"
-                                  >
-                                    Are you sure
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                  ></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                  <i
-                                    class="fa-solid fa-circle-exclamation"
-                                    style={{ fontSize: "48px", color: "red" }}
-                                  ></i>
-                                  <h2> You want to Logout</h2>
-                                </div>
-                                <div class="modal-footer">
-                                  <button
-                                    type="button"
-                                    class="btn btn-danger"
-                                    data-bs-dismiss="modal"
-                                  >
-                                    No
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-success"
-                                    data-bs-dismiss="modal"
-                                    onClick={() => {
-                                      Logoutfun();
-                                    }}
-                                  >
-                                    Yes
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                         <LogoutModal/>
                         </>
                       ) : (
                         <>
