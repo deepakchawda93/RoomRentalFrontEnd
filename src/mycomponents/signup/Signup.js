@@ -65,7 +65,7 @@ const Signup = () => {
         <div class="container d-flex justify-content-center">
           <div class="row">
             <div
-              class="card card-registration my-4"
+              class="card card-registration my-4 shadow"
               style={{ maxWidth: "1277px" }}
             >
               <div class="row m-4">
