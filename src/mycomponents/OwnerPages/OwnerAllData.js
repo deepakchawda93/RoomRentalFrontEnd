@@ -103,8 +103,8 @@ const OwnerAllData = () => {
             </>
           ) : (
             <>
-              {allOwnerData?.realData && allOwnerData?.realData.length !== 0 ? (
-                allOwnerData?.realData.map((item) => {
+              {allOwnerData?.allOwnerData && allOwnerData?.allOwnerData.length !== 0 ? (
+                allOwnerData?.allOwnerData.map((item) => {
                   return (
                     <>
                       <div

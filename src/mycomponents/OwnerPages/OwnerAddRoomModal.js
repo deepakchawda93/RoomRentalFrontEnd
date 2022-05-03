@@ -1,11 +1,83 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 import "../OwnerPages/ownerAccount.css";
 import PreviewRoomImg from "../../images/PreviewRoom.svg";
 import newImage from "../../images/RoomImage.jpg";
 
 const OwnerAddRoomModal = () => {
   const [previewRoomImage, setPreviewRoomImage] = useState(newImage);
+  let history = useHistory();
+  const [ErrorMsg, setErrorMsg] = useState();
 
+  const [isLoader, setLoader] = useState(false);
+  const [OwnnerData, setOwnerData] = useState({
+    Price: "",
+    NumberOfMamber: "",
+    State: "",
+    ZipCode: "",
+    Colony: "",
+    City: "",
+    Address: "",
+  });
+  const handleChangeOwnerData = (e) => {
+    const { name, value } = e.target;
+    setOwnerData({ ...OwnnerData, [name]: value });
+  };
+  const AddOwnerData = async (event) => {
+    event.preventDefault();
+    try {
+      setLoader(true);
+      if (
+        OwnnerData.Price == "" ||
+        OwnnerData.NumberOfMamber == "" ||
+        OwnnerData.State == "" ||
+        OwnnerData.ZipCode == "" ||
+        OwnnerData.Colony == "" ||
+        OwnnerData.City == "" ||
+        OwnnerData.Address == ""
+      ) {
+        return toast.error("✔ Plz fill all fields!", { theme: "colored" });
+      }
+      const responce = await axios.post(
+        "https://localhost:44380/AddOwnerData",
+        OwnnerData
+      );
+      setOwnerData({
+        Price: "",
+        NumberOfMamber: "",
+        State: "",
+        ZipCode: "",
+        Colony: "",
+        City: "",
+        Address: "",
+      })
+      console.log("res display", responce);
+      // if (responce.data.isSuccess == true) {
+      //   setLoader(false);
+      //   if (!responce.data.token) {
+      //     history.push("login");
+      //   }
+      //   localStorage.setItem("token", JSON.stringify(responce.data.token));
+      //   localStorage.setItem(
+      //     "userDetails",
+      //     JSON.stringify(responce.data)
+      //   );
+      //   toast.success("✔ User Login Successfully!", { theme: "colored" });
+      //   history.push("/");
+      //   localStorage.setItem("isLogin" ,true)
+
+      // } else {
+      //   setLoader(false);
+      //   setErrorMsg(responce.data.errors);
+      // }
+    } catch (error) {
+      console.log("error", error.responce);
+      setLoader(false);
+      toast.error("something went wrong !", { theme: "colored" });
+    }
+  };
 
   return (
     <>
@@ -63,9 +135,11 @@ const OwnerAddRoomModal = () => {
                           <input
                             type="number"
                             id="form3Example978"
-                            name="price"
+                            name="Price"
                             class="form-control form-control-lg"
-                            placeholder="FirstName "
+                            placeholder="Enter Price"
+                            value={OwnnerData.Price}
+                            onChange={handleChangeOwnerData}
                           />
                           <label class="form-label" for="form3Example978">
                             Price
@@ -78,8 +152,12 @@ const OwnerAddRoomModal = () => {
                             type="number"
                             id="form3Example97"
                             name="NumberOfMamber"
+                            value={OwnnerData.NumberOfMamber}
+                            onChange={handleChangeOwnerData}
                             class="form-control form-control-lg"
-                            placeholder="Mambers "
+                            placeholder="mambers "
+                            min={6}
+                            max={1}
                           />
                           <label class="form-label" for="form3Example97">
                             Number of mambers
@@ -87,12 +165,14 @@ const OwnerAddRoomModal = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="form-outline">
                       <input
                         type="text"
                         id="form3Example97"
-                        name="state"
+                        name="State"
+                        onChange={handleChangeOwnerData}
+                        value={OwnnerData.State}
                         class="form-control form-control-lg"
                         placeholder="state"
                       />
@@ -102,11 +182,13 @@ const OwnerAddRoomModal = () => {
                     </div>
                     <div class="form-outline">
                       <input
-                        type="email"
+                        type="number"
                         id="form3Example97"
-                        name="Email"
+                        name="ZipCode"
+                        onChange={handleChangeOwnerData}
                         class="form-control form-control-lg"
-                        placeholder="Email "
+                        placeholder="zip code"
+                        value={OwnnerData.ZipCode}
                       />
                       <label class="form-label" for="form3Example97">
                         Zip code
@@ -115,10 +197,12 @@ const OwnerAddRoomModal = () => {
                     <div class="form-outline">
                       <input
                         type="email"
-                        id="form3Example97" 
-                        name="Email"
+                        id="form3Example97"
+                        name="Colony"
+                        onChange={handleChangeOwnerData}
+                        value={OwnnerData.Colony}
                         class="form-control form-control-lg"
-                        placeholder="Email "
+                        placeholder="colony"
                       />
                       <label class="form-label" for="form3Example97">
                         Colony
@@ -128,9 +212,11 @@ const OwnerAddRoomModal = () => {
                       <input
                         type="email"
                         id="form3Example97"
-                        name="Email"
+                        name="City"
+                        onChange={handleChangeOwnerData}
+                        value={OwnnerData.City}
                         class="form-control form-control-lg"
-                        placeholder="Email "
+                        placeholder="city"
                       />
                       <label class="form-label" for="form3Example97">
                         City
@@ -141,9 +227,11 @@ const OwnerAddRoomModal = () => {
                       <input
                         type="text"
                         id="form3Example978"
-                        name="FirstName"
+                        name="Address"
+                        onChange={handleChangeOwnerData}
+                        value={OwnnerData.Address}
                         class="form-control form-control-lg"
-                        placeholder="address "
+                        placeholder="address"
                       />
                       <label class="form-label" for="form3Example978">
                         Address
@@ -153,9 +241,9 @@ const OwnerAddRoomModal = () => {
                       <input
                         type="file"
                         id="form3Example97"
-                        name="Email"
+                        // name="Email"
                         class="form-control form-control-lg"
-                        placeholder="image "
+                        placeholder="image"
                       />
                       <label class="form-label" for="form3Example97">
                         Image
@@ -173,8 +261,25 @@ const OwnerAddRoomModal = () => {
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">
-                Add <i class="fa-solid fa-plus"></i>
+              <button type="button" class="btn btn-primary" disabled={isLoader} 
+               onClick={(event) => {
+                      AddOwnerData(event);
+                    }}>
+                {isLoader ? (
+                  <>
+                    <div
+                      class="spinner-border text-dark spinner-border-sm"
+                      role="status"
+                    >
+                      <span class="visually-hidden">Loading...</span>
+                      
+                    </div> Loading....
+                  </>
+                ) : (
+                  <>
+                    Add <i class="fa-solid fa-plus"></i>
+                  </>
+                )}
               </button>
             </div>
           </div>
