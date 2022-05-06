@@ -28,7 +28,6 @@ const OwnerAddRoomModal = () => {
   const AddOwnerData = async (event) => {
     event.preventDefault();
     try {
-      setLoader(true);
       if (
         OwnnerData.Price == "" ||
         OwnnerData.NumberOfMamber == "" ||
@@ -40,6 +39,7 @@ const OwnerAddRoomModal = () => {
       ) {
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
       }
+      setLoader(true);
       const responce = await axios.post(
         "https://localhost:44380/AddOwnerData",
         OwnnerData
@@ -53,6 +53,7 @@ const OwnerAddRoomModal = () => {
         City: "",
         Address: "",
       })
+      setLoader(true);
       console.log("res display", responce);
       // if (responce.data.isSuccess == true) {
       //   setLoader(false);
@@ -82,26 +83,26 @@ const OwnerAddRoomModal = () => {
   return (
     <>
       <div
-        class="modal "
+        className="modal "
         id="exampleModal"
         // tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered  modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog modal-dialog-centered  modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Add new Item
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body ">
+            <div className="modal-body ">
               <div className="row align-items-center">
                 <div className="col-md-5">
                   {previewRoomImage ? (
@@ -131,121 +132,121 @@ const OwnerAddRoomModal = () => {
                   <form className="g-3">
                     <div className="row">
                       <div className="col-md-6">
-                        <div class="form-outline mb-2">
+                        <div className="form-outline mb-2">
                           <input
                             type="number"
                             id="form3Example978"
                             name="Price"
-                            class="form-control form-control-lg"
+                            className="form-control form-control-lg"
                             placeholder="Enter Price"
                             value={OwnnerData.Price}
                             onChange={handleChangeOwnerData}
                           />
-                          <label class="form-label" for="form3Example978">
+                          <label className="form-label" for="form3Example978">
                             Price
                           </label>
                         </div>
                       </div>
                       <div className="col-md-6">
-                        <div class="form-outline">
+                        <div className="form-outline">
                           <input
                             type="number"
                             id="form3Example97"
                             name="NumberOfMamber"
                             value={OwnnerData.NumberOfMamber}
                             onChange={handleChangeOwnerData}
-                            class="form-control form-control-lg"
+                            className="form-control form-control-lg"
                             placeholder="mambers "
                             min={6}
                             max={1}
                           />
-                          <label class="form-label" for="form3Example97">
+                          <label className="form-label" for="form3Example97">
                             Number of mambers
                           </label>
                         </div>
                       </div>
                     </div>
 
-                    <div class="form-outline">
+                    <div className="form-outline">
                       <input
                         type="text"
                         id="form3Example97"
                         name="State"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.State}
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         placeholder="state"
                       />
-                      <label class="form-label" for="form3Example97">
+                      <label className="form-label" for="form3Example97">
                         State
                       </label>
                     </div>
-                    <div class="form-outline">
+                    <div className="form-outline">
                       <input
                         type="number"
                         id="form3Example97"
                         name="ZipCode"
                         onChange={handleChangeOwnerData}
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         placeholder="zip code"
                         value={OwnnerData.ZipCode}
                       />
-                      <label class="form-label" for="form3Example97">
+                      <label className="form-label" for="form3Example97">
                         Zip code
                       </label>
                     </div>
-                    <div class="form-outline">
+                    <div className="form-outline">
                       <input
                         type="email"
                         id="form3Example97"
                         name="Colony"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.Colony}
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         placeholder="colony"
                       />
-                      <label class="form-label" for="form3Example97">
+                      <label className="form-label" for="form3Example97">
                         Colony
                       </label>
                     </div>
-                    <div class="form-outline">
+                    <div className="form-outline">
                       <input
                         type="email"
                         id="form3Example97"
                         name="City"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.City}
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         placeholder="city"
                       />
-                      <label class="form-label" for="form3Example97">
+                      <label className="form-label" for="form3Example97">
                         City
                       </label>
                     </div>
 
-                    <div class="form-outline mb-2">
+                    <div className="form-outline mb-2">
                       <input
                         type="text"
                         id="form3Example978"
                         name="Address"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.Address}
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         placeholder="address"
                       />
-                      <label class="form-label" for="form3Example978">
+                      <label className="form-label" for="form3Example978">
                         Address
                       </label>
                     </div>
-                    <div class="form-outline">
+                    <div className="form-outline">
                       <input
                         type="file"
                         id="form3Example97"
                         // name="Email"
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         placeholder="image"
                       />
-                      <label class="form-label" for="form3Example97">
+                      <label className="form-label" for="form3Example97">
                         Image
                       </label>
                     </div>
@@ -253,31 +254,31 @@ const OwnerAddRoomModal = () => {
                 </div>
               </div>
             </div>
-            <div class="modal-footer border-top-0">
+            <div className="modal-footer border-top-0">
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary" disabled={isLoader} 
+              <button type="button" className="btn btn-primary" disabled={isLoader} 
                onClick={(event) => {
                       AddOwnerData(event);
                     }}>
                 {isLoader ? (
                   <>
                     <div
-                      class="spinner-border text-dark spinner-border-sm"
+                      className="spinner-border text-dark spinner-border-sm"
                       role="status"
                     >
-                      <span class="visually-hidden">Loading...</span>
+                      <span className="visually-hidden">Loading...</span>
                       
                     </div> Loading....
                   </>
                 ) : (
                   <>
-                    Add <i class="fa-solid fa-plus"></i>
+                    Add <i className="fa-solid fa-plus"></i>
                   </>
                 )}
               </button>

@@ -10,7 +10,7 @@ import Signup from "../signup/Signup";
 import UserAccount from "../OwnerPages/OwnerAccount";
 import OwnerAccount from "../OwnerPages/OwnerAccount";
 import UserWishlist from "../userPages/UserWishlist";
-const CommanRoutesfile = () => {
+const CommanRoutesfile = ({setCheckLogin }) => {
   return (
     <>
       <Switch>
@@ -19,7 +19,7 @@ const CommanRoutesfile = () => {
         <Route exact path="/Contact" component={Contact} />
 
         <Route exact path="/login">
-          <Login />
+          <Login setCheckLogin={setCheckLogin} />
         </Route>
         <Route exact path="/signup">
           <Signup />

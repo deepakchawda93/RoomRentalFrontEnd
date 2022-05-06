@@ -19,59 +19,59 @@ const OwnerAccount = () => {
 
   return (
     <>
-      <div class={isActive ? "d-flex toggled" : "d-flex"} id="ownerAccount">
+      <div className={isActive ? "d-flex toggled" : "d-flex"} id="ownerAccount">
         {/*......site bare........ */}
-        <div class="bg-blackNew" id="sidebar-wrapper">
-          <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom ">
-            <i class="fas fa-house-user me-2"></i>
+        <div className="bg-blackNew" id="sidebar-wrapper">
+          <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom ">
+            <i className="fas fa-house-user me-2"></i>
             Owner HOME
           </div>
-          <div class="list-group list-group-flush my-3">
+          <div className="list-group list-group-flush my-3">
             <Link
               to="/OwnerAccount"
-              class="list-group-item list-group-item-action bg-transparent second-text active"
+              className="list-group-item list-group-item-action bg-transparent second-text active"
             >
-              <i class="fas fa-tachometer-alt me-2"></i> Owner Dashboard
+              <i className="fas fa-tachometer-alt me-2"></i> Owner Dashboard
             </Link>
             <Link
               to="/OwnerAccount/profile"
-              class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+              className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
             >
-              <i class="far fa-id-badge"></i> Profile
+              <i className="far fa-id-badge"></i> Profile
             </Link>
             <Link
               to="/OwnerAccount/pendingData"
-              class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+              className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
             >
-              <i class="fas fa-cart-plus"></i> Pending Data
+              <i className="fas fa-cart-plus"></i> Pending Data
             </Link>
             <Link
               to="/OwnerAccount/successData"
-              class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+              className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
             >
-              <i class="fas fa-cart-plus"></i> Success Data
+              <i className="fas fa-cart-plus"></i> Success Data
             </Link>
             <Link
                data-bs-toggle="modal"
                data-bs-target="#exampleModal2"
-              class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+              className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
             >
-              <i class="fas fa-power-off me-2"></i>Logout
+              <i className="fas fa-power-off me-2"></i>Logout
             </Link>
           </div>
         </div>
 
         <div id="page-content-wrapper">
-          <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4 bg-blackNew">
-            <div class="d-flex align-items-center" onClick={toggleClass}>
+          <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4 bg-blackNew">
+            <div className="d-flex align-items-center" onClick={toggleClass}>
               <i
-                class="fas fa-align-left primary-text fs-4 me-3"
+                className="fas fa-align-left primary-text fs-4 me-3"
                 id="menu-toggleBtn"
               ></i>
-              <h2 class="fs-2 m-0">Dashboard</h2>
+              <h2 className="fs-2 m-0">Dashboard</h2>
             </div>
           </nav>
-          <hr class="dropdown-divider" />
+          <hr className="dropdown-divider" />
           <Switch>
             <Route exact path="/OwnerAccount">
               <OwnerAllData />

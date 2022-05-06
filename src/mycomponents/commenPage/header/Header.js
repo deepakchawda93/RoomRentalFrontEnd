@@ -4,19 +4,17 @@ import { Link, useHistory } from "react-router-dom";
 import userAccount from "../../../images/userAccountImage.png";
 import LogoutModal from "./LogoutModal";
 
-const Header = () => {
+const Header = ({ checkLogin}) => {
   let history = useHistory();
-  const [checkLogin, setCheckLogin] = useState(null);
+  // const [checkLogin,setCheckLogin] = useState(null);
 
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
   // console.log(checkLogin?.role);
-  useEffect(() => {
-    setCheckLogin(JSON.parse(localStorage.getItem("userDetails")));
-    // findRoomRentData();
-  }, []);
-
- 
-
+  // useEffect(() => {
+  //   setCheckLogin(JSON.parse(localStorage.getItem("userDetails")));
+  //   console.log("first time run Use effect")
+  //   // findRoomRentData();
+  // }, []);
   return (
     <>
       <section id="nav_bar">
@@ -62,10 +60,10 @@ const Header = () => {
                           aria-current="page"
                         >
                           Contact
-                        </Link>
+                        </Link> 
                       </li>
                       {checkLogin == null && (
-                        <>
+                        <> 
                           <li className="nav-item">
                             <Link
                               to="/login"
@@ -115,7 +113,7 @@ const Header = () => {
                         </>
                       )}
                     </ul>
-                    <form class="d-flex ms-auto">
+                     <form class="d-flex ms-auto">
                       {checkLogin !== null ? (
                         <>
                           <div className="dropdown">
@@ -142,7 +140,7 @@ const Header = () => {
                             >
                               <li>
                                 <p class="dropdown-item-text">
-                                  {/* <i class="fas fa-envelope"></i> */}
+                                
                                   {checkLogin.userData[0]}
                                 </p>
                               </li>
@@ -201,7 +199,7 @@ const Header = () => {
                           </button>
                         </>
                       )}
-                    </form>
+                    </form> 
                   </div>
                 </div>
               </nav>

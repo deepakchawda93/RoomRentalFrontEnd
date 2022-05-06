@@ -1,6 +1,6 @@
 import { Email, Password } from "@mui/icons-material";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import {FirebaseLoginFun} from "../FirebaseLogin/FireBaseLogin"
@@ -8,7 +8,7 @@ import {FirebaseLoginFun} from "../FirebaseLogin/FireBaseLogin"
 import loginImg from "../../images/loginImg.svg";
 import "../Login/login.css";
 
-const Login = () => {
+const Login = ({setCheckLogin}) => {
   let history = useHistory();
   const [ErrorMsg, setErrorMsg] = useState();
 
@@ -22,7 +22,7 @@ const Login = () => {
     setLogin({ ...Login, [name]: value });
   };
   const submitLoign = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); 
     try {
       setLoader(true);
       if (
@@ -40,19 +40,17 @@ const Login = () => {
           history.push("login");
         }
         localStorage.setItem("token", JSON.stringify(responce.data.token));
-        localStorage.setItem(
-          "userDetails",
-          JSON.stringify(responce.data)
+        localStorage.setItem("userDetails",JSON.stringify(responce.data)
         );
         toast.success("✔ User Login Successfully!", { theme: "colored" });
+        setCheckLogin(null)
         history.push("/");
-        localStorage.setItem("isLogin" ,true)
-      
       } else {
         setLoader(false);
         setErrorMsg(responce.data.errors);
       }
     } catch (error) {
+      console.log(error)
       console.log("error", error.responce);
       setLoader(false);
       toast.error("Your server is not responding !", { theme: "colored" });
@@ -62,24 +60,24 @@ const Login = () => {
     <>
       <div id="loginForm" className="d-flex align-items-center">
         <div className="container d-flex justify-content-center">
-          <div class="card cardBorder shadow" style={{ maxWidth: "800px" }}>
-            <div class="row g-0">
-              <div class="col-md-4 order-md-1 d-flex align-items-center">
-                <img src={loginImg} class="img-fluid rounded-start" alt="..." />
+          <div className="card cardBorder shadow" style={{ maxWidth: "800px" }}>
+            <div className="row g-0">
+              <div className="col-md-4 order-md-1 d-flex align-items-center">
+                <img src={loginImg} className="img-fluid rounded-start" alt="..." />
               </div>
-              <div class="col-md-8 order-md-0">
-                <div class="card-body">
-                  <h5 class="card-title text-center">LOGIN FORM</h5>
+              <div className="col-md-8 order-md-0">
+                <div className="card-body">
+                  <h5 className="card-title text-center">LOGIN FORM</h5>
                   {!ErrorMsg ? (
                     " "
                   ) : (
                     <>
                       <div
-                        class="alert alert-danger d-flex align-items-center p-1"
+                        className="alert alert-danger d-flex align-items-center p-1"
                         role="alert"
                       >
                         <svg
-                          class="bi flex-shrink-0 me-2"
+                          className="bi flex-shrink-0 me-2"
                           width="5"
                           height="5"
                           role="img"
@@ -95,30 +93,31 @@ const Login = () => {
                             alignItems: "center",
                           }}
                         >
-                          <i class="fas fa-exclamation-triangle "></i>{" "}
+                          <i className="fas fa-exclamation-triangle "></i>{" "}
                           {ErrorMsg}
                         </p>
                       </div>
                     </>
                   )}
                   <form
-                    class="row g-3"
+                    className="row g-3"
                     onSubmit={(event) => {
                       submitLoign(event);
+                      
                     }}
                   >
-                    <div class="col-md-12 ">
-                      <label for="validationDefault01" class="form-label">
+                    <div className="col-md-12 ">
+                      <label htmlFor="validationDefault01" className="form-label">
                         Email id
                       </label>
                       <div className="input-group ">
-                        <span class="input-group-text" id="basic-addon1">
-                          <i class="fas fa-envelope"></i>
+                        <span className="input-group-text" id="basic-addon1">
+                          <i className="fas fa-envelope"></i>
                         </span>
 
                         <input
                           type="email"
-                          class="form-control"
+                          className="form-control"
                           name="Email"
                           value={Login.Email}
                           onChange={handleChangeLogin}
@@ -129,17 +128,17 @@ const Login = () => {
                       </div>
                     </div>
 
-                    <div class="col-md-12 ">
-                      <label for="validationDefault02" class="form-label">
+                    <div className="col-md-12 ">
+                      <label htmlFor="validationDefault02" className="form-label">
                         Password
                       </label>
                       <div className="input-group ">
-                        <span class="input-group-text" id="basic-addon1">
-                          <i class="fas fa-lock"></i>
+                        <span className="input-group-text" id="basic-addon1">
+                          <i className="fas fa-lock"></i>
                         </span>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="Password"
                           value={Login.Password}
                           onChange={handleChangeLogin}
@@ -150,34 +149,34 @@ const Login = () => {
                       </div>
                     </div>
 
-                    <div class="col-12">
-                      <div class="form-check">
+                    <div className="col-12">
+                      <div className="form-check">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           value=""
                           id="invalidCheck2"
                           required
                         />
-                        <label class="form-check-label" for="invalidCheck2">
+                        <label className="form-check-label" htmlFor="invalidCheck2">
                           Agree to terms and conditions
                         </label>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <div class="d-grid ">
+                    <div className="col-12">
+                      <div className="d-grid ">
                         <button
-                          class="btn btn-warning"
+                          className="btn btn-warning"
                           type="submit"
                           disabled={isLoader}
                         >
                           {isLoader ? (
                             <>
                               <div
-                                class="spinner-border text-dark spinner-border-sm"
+                                className="spinner-border text-dark spinner-border-sm"
                                 role="status"
                               >
-                                <span class="visually-hidden">Loading...</span>
+                                <span className="visually-hidden">Loading...</span>
                               </div>
                             </>
                           ) : (
@@ -190,10 +189,10 @@ const Login = () => {
                       ___________OR___________
                     </p>
                   </form>
-                  <div class="row g-3">
+                  <div className="row g-3">
                     <div className=" col-md-6 text-center">
-                      <div class="d-grid ">
-                        <button class="btn btn-danger" type="submit" onClick={()=>{
+                      <div className="d-grid ">
+                        <button className="btn btn-danger" type="submit" onClick={()=>{
                           FirebaseLoginFun();
                         }}>
                           <i className="fab fa-google-plus-g "></i> Login with
@@ -202,9 +201,9 @@ const Login = () => {
                       </div>
                     </div>
                     <div className=" col-md-6">
-                      <div class="d-grid ">
-                        <button class="btn btn-primary" type="submit">
-                          <i class="fa fa-facebook fa-fw"></i> Login with
+                      <div className="d-grid ">
+                        <button className="btn btn-primary" type="submit">
+                          <i className="fa fa-facebook fa-fw"></i> Login with
                           Facebook
                         </button>
                       </div>

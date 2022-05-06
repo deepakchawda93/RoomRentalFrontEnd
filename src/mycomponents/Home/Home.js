@@ -115,7 +115,7 @@ const Home = () => {
               <img
                 src={home1png}
                 alt=""
-                srcset=""
+                srcSet=""
                 className="img-fluid  text-center p-4"
               />
             </div>
@@ -140,10 +140,10 @@ const Home = () => {
                   SearchFuntion();
                 }}
               >
-                <div class="row">
-                  <div class="col-md-12 mb-4">
+                <div className="row">
+                  <div className="col-md-12 mb-4">
                     <select
-                      class="select w-100 px-2 py-3 rounded-2 "
+                      className="select w-100 px-2 py-3 rounded-2 "
                       name="rentPlace"
                       onChange={handleChangeSearch}
                       required="required"
@@ -155,9 +155,9 @@ const Home = () => {
                       <option value="Pg">PG</option>
                     </select>
                   </div>
-                  <div class="col-md-6 mb-4">
+                  <div className="col-md-6 mb-4">
                     <select
-                      class="select w-100 px-2 py-3 rounded-2 "
+                      className="select w-100 px-2 py-3 rounded-2 "
                       name="person"
                       onChange={handleChangeSearch}
                       required="required"
@@ -167,9 +167,9 @@ const Home = () => {
                       <option value="Girls">Girls</option>
                     </select>
                   </div>
-                  <div class="col-md-6 mb-4">
+                  <div className="col-md-6 mb-4">
                     <select
-                      class="select w-100 px-2 py-3 rounded-2 "
+                      className="select w-100 px-2 py-3 rounded-2 "
                       name="location"
                       onChange={handleChangeSearch}
                       required="required"
@@ -237,9 +237,9 @@ const Home = () => {
                     </select>
                   </div>
 
-                  <div class="col-md-6  d-grid ">
-                    <button type="submit" class="btn btn-success py-3 px-3">
-                      Search <i class="fa fa-search" aria-hidden="true"></i>
+                  <div className="col-md-6  d-grid ">
+                    <button type="submit" className="btn btn-success py-3 px-3">
+                      Search <i className="fa fa-search" aria-hidden="true"></i>
                     </button>
                   </div>
                 </div>
@@ -247,7 +247,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <img src={firstWave} alt="" srcset="" className="firstWave" />
+        <img src={firstWave} alt="" srcSet="" className="firstWave" />
       </section>
      
       {/* ......................banneer2..................... */}
@@ -282,13 +282,13 @@ const Home = () => {
               return (
                 <>
                   <div className="col-lg-4 col-md-6">
-                    <div class="mt-4">
+                    <div className="mt-4">
                       <img
                         src={image}
-                        class="img-fluid service_img "
+                        className="img-fluid service_img "
                         alt="image farnicher"
                       />
-                      <div class="card-body">
+                      <div className="card-body">
                         <h2>{heading}</h2>
                         <p>{paragraph}</p>
                       </div>
@@ -299,7 +299,7 @@ const Home = () => {
             })}
 
             <div className="mt-5">
-              <button type="button" class="btn btn-primary mar">
+              <button type="button" className="btn btn-primary mar">
                 All Services
               </button>
             </div>
@@ -317,7 +317,7 @@ const Home = () => {
                 src={whyChooseUs}
                 alt=""
                 className="img-fluid text-center"
-                srcset=""
+                srcSet=""
               />
             </div>
             <div className="col-md-6 p-4">
@@ -326,30 +326,30 @@ const Home = () => {
               </h1>
               <ul style={{ listStyle: "none" }}>
                 <li>
-                  <i class="fas fa-chevron-circle-right"></i> we are believe in
+                  <i className="fas fa-chevron-circle-right"></i> we are believe in
                   strong relationship and bond
                 </li>
                 <li>
-                  <i class="fas fa-chevron-circle-right"></i> Lorem ipsum dolor
+                  <i className="fas fa-chevron-circle-right"></i> Lorem ipsum dolor
                   sit amet, consectetur adipisicing elit. architecto
                 </li>
                 <li>
-                  <i class="fas fa-chevron-circle-right"></i> nostrum nulla quae
+                  <i className="fas fa-chevron-circle-right"></i> nostrum nulla quae
                   praesentium quod autem deleniti, quas culpa perferendis sit
                   officia distinctio.
                 </li>
                 <li>
                   {" "}
-                  <i class="fas fa-chevron-circle-right"></i> we are believe in
+                  <i className="fas fa-chevron-circle-right"></i> we are believe in
                   strong relationship and bond
                 </li>
                 <li>
-                  <i class="fas fa-chevron-circle-right"></i> Labore nesciunt
+                  <i className="fas fa-chevron-circle-right"></i> Labore nesciunt
                   eligendi dolore ipsa magnam est voluptatem
                 </li>
                 <li>
                   {" "}
-                  <i class="fas fa-chevron-circle-right"></i> we are believe in
+                  <i className="fas fa-chevron-circle-right"></i> we are believe in
                   strong relationship and bond
                 </li>
               </ul>

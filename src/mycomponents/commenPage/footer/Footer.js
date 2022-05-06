@@ -7,13 +7,13 @@ import "../footer/footer.css"
 const Footer = () => {
   return (
     <>
-      <div class="footer">
-      <img src={Secondwave} alt="" srcset="" className="seconWave" />
-        <div class="container">
+      <div className="footer">
+      <img src={Secondwave} alt="" srcSet="" className="seconWave" />
+        <div className="container">
        
-          <div class="row py-5">
-            <div class="col-md-5">
-              <div class="footer-content">
+          <div className="row py-5">
+            <div className="col-md-5">
+              <div className="footer-content">
                 <h4>ABOUT ROOM RENT</h4>
                 <p>
                   The company is born out of an idea to make house hunting easy
@@ -24,32 +24,32 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-            <div class="col-md-7">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="footer-content">
+            <div className="col-md-7">
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="footer-content">
                     <h4>GET TO KNOW US</h4>
                     <ul>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="">Home</a>
                       </li>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="">About Us</a>
                       </li>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="">Blog</a>
                       </li>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="">
                           Refer and Earn
                         </a>
                       </li>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="">
                           Complaint
                         </a>
@@ -57,25 +57,25 @@ const Footer = () => {
                     </ul>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="footer-content">
+                <div className="col-md-4">
+                  <div className="footer-content">
                     <h4>CONNECT WITH US</h4>
                     <ul className=" d-flex flex-wrap">
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="https://www.instagram.com/"><img src={linkedin} alt="" /></a>
                       </li>
 
                       
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="https://www.facebook.com/">
                          <img src={facebook} alt="" />
                         </a>
                       </li>
 
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="https://web.whatsapp.com/">
                           <img src={whatsapp} alt="" />
                         </a>
@@ -83,22 +83,22 @@ const Footer = () => {
                     </ul>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="footer-content">
+                <div className="col-md-4">
+                  <div className="footer-content">
                     <h4>CUSTOMER SERVICE</h4>
                     <ul>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="">
                           How It Works
                         </a>
                       </li>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="">Careers</a>
                       </li>
                       <li>
-                        <i class="fa fa-angle-right"></i>
+                        <i className="fa fa-angle-right"></i>
                         <a href="/#">Pay Rent</a>
                       </li>
                     </ul>
@@ -109,11 +109,11 @@ const Footer = () => {
           </div>
          
         </div>
-        <hr class="dropdown-divider"/>
-        <div class="footer-bottom">
-          <div class="container">
-            <div class="row text-center">
-              <div class="col-md-12">
+        <hr className="dropdown-divider"/>
+        <div className="footer-bottom">
+          <div className="container">
+            <div className="row text-center">
+              <div className="col-md-12">
                 <p>Copyright © 2020 Room Rent Technologies Pvt. Ltd.</p>
               </div>
             </div>

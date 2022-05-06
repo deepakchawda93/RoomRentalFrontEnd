@@ -10,42 +10,42 @@ const LogoutModal = () => {
   return (
     <>
       <div
-        class="modal"
+        className="modal"
         id="exampleModal2"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Are you sure
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body text-center">
+            <div className="modal-body text-center">
               <i
-                class="fa-solid fa-circle-exclamation"
+                className="fa-solid fa-circle-exclamation"
                 style={{ fontSize: "48px", color: "red" }}
               ></i>
               <h2> You want to Logout</h2>
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 data-bs-dismiss="modal"
               >
                 No
               </button>
               <button
                 type="button"
-                class="btn btn-success"
+                className="btn btn-success"
                 data-bs-dismiss="modal"
                 onClick={() => {
                   Logoutfun();

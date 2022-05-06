@@ -9,8 +9,8 @@ const UserAccount = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-2 shadow ">
-              <div class="bg-white">
-                <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+              <div className="bg-white">
+                <div className="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
                   <img
                     src={UserAccountImage}
                     alt="UserAccountImage"
@@ -18,31 +18,31 @@ const UserAccount = () => {
                     style={{ border: "3px solid black" }}
                   />
                 </div>
-                <div class="list-group list-group-flush my-3">
+                <div className="list-group list-group-flush my-3">
                   <Link
                     to=""
-                    class="list-group-item list-group-item-action bg-transparent second-text active"
+                    className="list-group-item list-group-item-action bg-transparent second-text active"
                   >
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    <i className="fas fa-tachometer-alt me-2"></i>Dashboard
                   </Link>
                   <Link
                     to="/Owner/profile"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+                    className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
                   >
-                    <i class="far fa-id-badge"></i> Profile
+                    <i className="far fa-id-badge"></i> Profile
                   </Link>
                   <Link
                     to="/user/wishlist"
-                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+                    className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
                   >
-                    <i class="fas fa-cart-plus"></i> Wishlist
+                    <i className="fas fa-cart-plus"></i> Wishlist
                   </Link>
 
                   <Link
                     to=""
-                    class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+                    className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
                   >
-                    <i class="fas fa-power-off me-2"></i>Logout
+                    <i className="fas fa-power-off me-2"></i>Logout
                   </Link>
                 </div>
               </div>

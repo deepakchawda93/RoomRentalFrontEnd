@@ -38,44 +38,44 @@ const OwnerAllData = () => {
   // const TotalData = Object.keys(allOwnerData).length
   return (
     <>
-      <div class="container-fluid px-4">
-        <div class="row g-3 my-2 ">
-          <div class="col-md-3">
-            <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+      <div className="container-fluid px-4">
+        <div className="row g-3 my-2 ">
+          <div className="col-md-3">
+            <div className="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 class="fs-2">{allOwnerData?.totalCount}</h3>
-                <p class="fs-5">Total</p>
+                <h3 className="fs-2">{allOwnerData?.totalCount}</h3>
+                <p className="fs-5">Total</p>
               </div>
-              <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+              <i className="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
             </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+          <div className="col-md-3">
+            <div className="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 class="fs-2">{allOwnerData?.pendingCount}</h3>
-                <p class="fs-5">Pending</p>
+                <h3 className="fs-2">{allOwnerData?.pendingCount}</h3>
+                <p className="fs-5">Pending</p>
               </div>
-              <i class="fa-regular fa-hourglass fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+              <i className="fa-regular fa-hourglass fs-1 primary-text border rounded-full secondary-bg p-3"></i>
             </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+          <div className="col-md-3">
+            <div className="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 class="fs-2">{allOwnerData?.successCount}</h3>
-                <p class="fs-5">Success</p>
+                <h3 className="fs-2">{allOwnerData?.successCount}</h3>
+                <p className="fs-5">Success</p>
               </div>
-              <i class="fa-solid fa-clipboard-check fa-3x primary-text border rounded-full secondary-bg p-3 "></i>
+              <i className="fa-solid fa-clipboard-check fa-3x primary-text border rounded-full secondary-bg p-3 "></i>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+          <div className="col-md-3">
+            <div className="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 class="fs-2">{allOwnerData?.rejectedCount}</h3>
-                <p class="fs-5">Rejected</p>
+                <h3 className="fs-2">{allOwnerData?.rejectedCount}</h3>
+                <p className="fs-5">Rejected</p>
               </div>
-              <i class="fa-solid fa-ban fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+              <i className="fa-solid fa-ban fs-1 primary-text border rounded-full secondary-bg p-3"></i>
             </div>
           </div>
         </div>
@@ -85,18 +85,18 @@ const OwnerAllData = () => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            Add Room <i class="fa-solid fa-plus"></i>
+            Add Room <i className="fa-solid fa-plus"></i>
           </button>
         </div>
 
         <OwnerAddRoomModal />
         <div className="row gap-5 justify-content-center justify-content-lg-start my-3">
-          <h3 class="fs-4 mb-3">All Owner data</h3>
+          <h3 className="fs-4 mb-3">All Owner data</h3>
           {isLoader ? (
             <>
               <div className="text-center">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
                 </div>
                 <div>Loading.....</div>
               </div>
@@ -108,27 +108,27 @@ const OwnerAllData = () => {
                   return (
                     <>
                       <div
-                        class="card shadow m-2 p-0 m-2"
+                        className="card shadow m-2 p-0 m-2"
                         style={{ width: "20rem" }}
                       >
                         <img
                           src={newImage}
-                          class="card-img-top w-100 hover-zoom"
+                          className="card-img-top w-100 hover-zoom"
                           style={{ maxHeight: "15rem" }}
                           alt="..."
                         />
-                        <div class="card-body">
-                          <h5 class="card-title">
+                        <div className="card-body">
+                          <h5 className="card-title">
                             Price :{" "}
-                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            <i className="fa-solid fa-indian-rupee-sign"></i>
                             {item.price}
                           </h5>
-                          <p class="card-text">Address : {item.address}</p>
-                          <p class="card-text">City : {item.city}</p>
-                          <p class="card-text">
+                          <p className="card-text">Address : {item.address}</p>
+                          <p className="card-text">City : {item.city}</p>
+                          <p className="card-text">
                             NumberOfMambers : {item.numberOfMambers}
                           </p>
-                          <p class="card-text ">
+                          <p className="card-text ">
                             Status :{" "}
                             <span
                               // className={
@@ -158,9 +158,9 @@ const OwnerAllData = () => {
                             >
                               Edit Data
                             </button>
-                            <button type="button" class="btn btn-warning me-2">
+                            <button type="button" className="btn btn-warning me-2">
                               More Details
-                              <i class="fas fa-angle-double-right"></i>
+                              <i className="fas fa-angle-double-right"></i>
                             </button>
                           </div>
                         </div>
@@ -182,9 +182,9 @@ const OwnerAllData = () => {
                         type="button"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
-                        class="btn btn-outline-info"
+                        className="btn btn-outline-info"
                       >
-                        Add new Data <i class="fa-solid fa-plus"></i>
+                        Add new Data <i className="fa-solid fa-plus"></i>
                       </button>
                     </div>
                   </div>
