@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
-const LogoutModal = () => {
+const LogoutModal = ({setCheckLogin1}) => {
   let history = useHistory();
   const Logoutfun = () => {
     localStorage.clear();
+    setCheckLogin1("hii")
     history.push("/");
   };
   return (

@@ -127,7 +127,7 @@ const Signup = () => {
                               className="form-control form-control-lg"
                               placeholder="FirstName "
                             />
-                            <label className="form-label" for="form3Example978">
+                            <label className="form-label" htmlFor="form3Example978">
                               First name
                             </label>
                           </div>
@@ -143,7 +143,7 @@ const Signup = () => {
                               className="form-control form-control-lg"
                               placeholder="LastName "
                             />
-                            <label className="form-label" for="form3Example979">
+                            <label className="form-label" htmlFor="form3Example979">
                               Last name
                             </label>
                           </div>
@@ -159,7 +159,7 @@ const Signup = () => {
                           className="form-control form-control-lg"
                           placeholder="Email "
                         />
-                        <label className="form-label" for="form3Example97">
+                        <label className="form-label" htmlFor="form3Example97">
                           Email ID
                         </label>
                       </div>
@@ -174,7 +174,7 @@ const Signup = () => {
                           className="form-control form-control-lg"
                           placeholder="******"
                         />
-                        <label className="form-label" for="form3Example1m1">
+                        <label className="form-label" htmlFor="form3Example1m1">
                           Password
                         </label>
                       </div>
@@ -188,7 +188,7 @@ const Signup = () => {
                           className="form-control form-control-lg"
                           placeholder="******"
                         />
-                        <label className="form-label" for="form3Example1m1">
+                        <label className="form-label" htmlFor="form3Example1m1">
                           Conform Password
                         </label>
                       </div>
@@ -205,7 +205,7 @@ const Signup = () => {
                             onChange={handleChangeLogin}
                             value="user"
                           />
-                          <label className="form-check-label" for="UserTypeuser">
+                          <label className="form-check-label" htmlFor="UserTypeuser">
                             User
                           </label>
                         </div>
@@ -219,7 +219,7 @@ const Signup = () => {
                             onChange={handleChangeLogin}
                             value="owner"
                           />
-                          <label className="form-check-label" for="userTypeOwner">
+                          <label className="form-check-label" htmlFor="userTypeOwner">
                             Owner
                           </label>
                         </div>
@@ -294,7 +294,7 @@ export default Signup;
                   <h5 className="card-title text-center">SIGNUP FORM</h5>
                   <form className="row g-3">
                     <div className="col-md-12 ">
-                      <label for="validationDefault02" className="form-label">
+                      <label htmlFor="validationDefault02" className="form-label">
                         User Name
                       </label>
                       <input
@@ -306,7 +306,7 @@ export default Signup;
                       />
                     </div>
                     <div className="col-md-12 ">
-                      <label for="validationDefault01" className="form-label">
+                      <label htmlFor="validationDefault01" className="form-label">
                         Email id
                       </label>
                       <input
@@ -319,7 +319,7 @@ export default Signup;
                     </div>
 
                     <div className="col-md-12 ">
-                      <label for="validationDefault02" className="form-label">
+                      <label htmlFor="validationDefault02" className="form-label">
                         Password
                       </label>
                       <input
@@ -331,7 +331,7 @@ export default Signup;
                       />
                     </div>
                     <div className="col-md-12 ">
-                      <label for="validationDefault02" className="form-label">
+                      <label htmlFor="validationDefault02" className="form-label">
                         Conform Password
                       </label>
                       <input

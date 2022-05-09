@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import userAccount from "../../../images/userAccountImage.png";
 import LogoutModal from "./LogoutModal";
 
-const Header = ({ checkLogin}) => {
+const Header = ({ setCheckLogin1,checkLogin}) => {
   let history = useHistory();
   // const [checkLogin,setCheckLogin] = useState(null);
 
@@ -28,7 +28,7 @@ const Header = ({ checkLogin}) => {
                       className="SiteLogo"
                       src="https://thumbs.dreamstime.com/b/room-rent-sign-isolated-white-background-simple-vector-logo-room-rent-sign-isolated-white-background-221788015.jpg"
                       alt="site logo"
-                      srcset=""
+                      srcSet=""
                     />
                   </Link>
                   <button
@@ -40,7 +40,7 @@ const Header = ({ checkLogin}) => {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                   >
-                    <span class="navbar-toggler-icon"></span>
+                    <span className="navbar-toggler-icon"></span>
                   </button>
                   <div
                     className="collapse navbar-collapse"
@@ -113,7 +113,7 @@ const Header = ({ checkLogin}) => {
                         </>
                       )}
                     </ul>
-                     <form class="d-flex ms-auto">
+                     <form className="d-flex ms-auto">
                       {checkLogin !== null ? (
                         <>
                           <div className="dropdown">
@@ -123,47 +123,47 @@ const Header = ({ checkLogin}) => {
                             ) : (
                               <>
                                 <img
-                                  class="btn  dropdown-toggle UserAccount"
+                                  className="btn  dropdown-toggle UserAccount"
                                   type="button"
                                   id="dropdownMenuButton1"
                                   data-bs-toggle="dropdown"
                                   aria-expanded="false"
                                   src={userAccount}
                                   alt="UserAccount"
-                                  srcset=""
+                                  srcSet=""
                                 />
                               </>
                             )}
                             <ul
-                              class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end"
+                              className="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end"
                               aria-labelledby="dropdownMenuButton1"
                             >
                               <li>
-                                <p class="dropdown-item-text">
+                                <p className="dropdown-item-text">
                                 
                                   {checkLogin.userData[0]}
                                 </p>
                               </li>
                               <li>
-                                <hr class="dropdown-divider" />
+                                <hr className="dropdown-divider" />
                               </li>
                               <li>
                                 {checkLogin?.role == "user" ? (
                                   <>
                                     <Link
-                                      class="dropdown-item"
+                                      className="dropdown-item"
                                       to="/userAccount"
                                     >
-                                      <i class="fas fa-user-circle"></i> Account
+                                      <i className="fas fa-user-circle"></i> Account
                                     </Link>
                                   </>
                                 ) : (
                                   <>
                                     <Link
-                                      class="dropdown-item"
+                                      className="dropdown-item"
                                       to="/OwnerAccount"
                                     >
-                                      <i class="fas fa-user-circle"></i> Account
+                                      <i className="fas fa-user-circle"></i> Account
                                     </Link>
                                   </>
                                 )}
@@ -171,30 +171,30 @@ const Header = ({ checkLogin}) => {
 
                               <li>
                                 <a
-                                  class="dropdown-item"
+                                  className="dropdown-item"
                                   data-bs-toggle="modal"
                                   data-bs-target="#exampleModal2"
                                 >
-                                  <i class="fas fa-power-off"></i> Logout
+                                  <i className="fas fa-power-off"></i> Logout
                                 </a>
                               </li>
                             </ul>
                           </div>
-                         <LogoutModal/>
+                         <LogoutModal setCheckLogin1={setCheckLogin1}/>
                         </>
                       ) : (
                         <>
                           <input
-                            class="form-control me-2"
+                            className="form-control me-2"
                             type="search"
                             placeholder="Search"
                             aria-label="Search"
                           />
                           <button
-                            class="btn btn-outline-success btn_border"
+                            className="btn btn-outline-success btn_border"
                             type="submit"
                           >
-                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <i className="fa fa-search" aria-hidden="true"></i>
                             Search
                           </button>
                         </>

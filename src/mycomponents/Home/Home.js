@@ -17,7 +17,7 @@ import "./home.css";
 import RoomDataCard from "./RoomDataCard";
 // floating button
 
-import { Container, Button } from "react-floating-action-button";
+
 import { Link } from "react-router-dom";
 import CarouselDesign from "./Carousel/CarouselDesign";
 
@@ -61,24 +61,8 @@ const Home = () => {
         " Having consistent wifi throughout an entire hostel building isnt as critical as having basic security features throughout an entire hostel building, but ",
     },
   ];
-  const [visible, setVisible] = useState(false);
 
-  const toggleVisible = () => {
-    const scrolled = document.documentElement.scrollTop;
-    if (scrolled > 100) {
-      setVisible(true);
-    } else if (scrolled <= 100) {
-      setVisible(false);
-    }
-  };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-  window.addEventListener("scroll", toggleVisible);
 
   const [searchFilter, setsearchFilter] = useState({
     rentPlace: "",
@@ -394,16 +378,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* npm i react-floating-action-button */}
-      <div style={{ display: visible ? "inline" : "none" }}>
-        <Container>
-          <Button
-            tooltip="PageUp"
-            icon="fas fa-arrow-up"
-            onClick={scrollToTop}
-          />
-        </Container>
-      </div>
+    
     </>
   );
 };

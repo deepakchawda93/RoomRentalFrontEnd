@@ -29,7 +29,7 @@ const OwnerAllData = () => {
       );
       setAllOwnerData(res.data.data);
       setIsLoader(false);
-      console.log("res data ", res.data.data);
+      // console.log("res data ", res.data.data);
     } catch (error) {
       console.log("error", error.res);
     }
@@ -90,6 +90,7 @@ const OwnerAllData = () => {
         </div>
 
         <OwnerAddRoomModal />
+
         <div className="row gap-5 justify-content-center justify-content-lg-start my-3">
           <h3 className="fs-4 mb-3">All Owner data</h3>
           {isLoader ? (
@@ -171,7 +172,7 @@ const OwnerAllData = () => {
               ) : (
                 <>
                   <div className="d-flex justify-content-center align-content-center mb-3">
-                    <div className="text-center  col-lg-4">
+                    <div className="text-center col-lg-3">
                       <img
                         src={notFountOwnerImg}
                         alt=""

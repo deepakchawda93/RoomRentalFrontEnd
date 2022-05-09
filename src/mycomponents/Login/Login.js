@@ -8,7 +8,7 @@ import {FirebaseLoginFun} from "../FirebaseLogin/FireBaseLogin"
 import loginImg from "../../images/loginImg.svg";
 import "../Login/login.css";
 
-const Login = ({setCheckLogin}) => {
+const Login = ({setCheckLogin1}) => {
   let history = useHistory();
   const [ErrorMsg, setErrorMsg] = useState();
 
@@ -43,7 +43,7 @@ const Login = ({setCheckLogin}) => {
         localStorage.setItem("userDetails",JSON.stringify(responce.data)
         );
         toast.success("✔ User Login Successfully!", { theme: "colored" });
-        setCheckLogin(null)
+        setCheckLogin1("hi")
         history.push("/");
       } else {
         setLoader(false);

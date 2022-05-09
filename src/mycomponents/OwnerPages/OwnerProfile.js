@@ -27,7 +27,7 @@ const OwnderProfile = () => {
 
                     <div className="">
                       <input  type="file" className="btn btn-outline-warning" accept="image/png,image/x-png,image/gif,image/jpeg" id="selectFile" style={{ borderRadius : "20px"}}/>
-                      <label className="form-label py-2" for="selectFile">
+                      <label className="form-label py-2" htmlFor="selectFile">
                       Select Picture
                         </label>
                     </div>
@@ -53,7 +53,7 @@ const OwnderProfile = () => {
                               className="form-control form-control-lg"
                               
                             />
-                            <label className="form-label" for="form3Example978">
+                            <label className="form-label" htmlFor="form3Example978">
                               First name
                             </label>
                           </div>
@@ -70,7 +70,7 @@ const OwnderProfile = () => {
                               className="form-control form-control-lg"
                               
                             />
-                            <label className="form-label" for="form3Example979">
+                            <label className="form-label" htmlFor="form3Example979">
                               Last name
                             </label>
                           </div>
@@ -87,7 +87,7 @@ const OwnderProfile = () => {
                           className="form-control form-control-lg"
                           
                         />
-                        <label className="form-label" for="form3Example97">
+                        <label className="form-label" htmlFor="form3Example97">
                           Email ID
                         </label>
                       </div>
@@ -103,7 +103,7 @@ const OwnderProfile = () => {
                           className="form-control form-control-lg"
                          
                         />
-                        <label className="form-label" for="form3Example1m1">
+                        <label className="form-label" htmlFor="form3Example1m1">
                           Phone Number
                         </label>
                       </div>
@@ -118,7 +118,7 @@ const OwnderProfile = () => {
                           className="form-control form-control-lg"
                           
                         />
-                        <label className="form-label" for="form3Example1m1">
+                        <label className="form-label" htmlFor="form3Example1m1">
                           Address
                         </label>
                       </div>
