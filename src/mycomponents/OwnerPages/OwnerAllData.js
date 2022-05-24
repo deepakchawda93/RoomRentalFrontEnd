@@ -83,7 +83,7 @@ const OwnerAllData = () => {
           <button
             className="btn btn-success"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+             data-bs-target="#staticBackdrop"
           >
             Add Room <i className="fa-solid fa-plus"></i>
           </button>

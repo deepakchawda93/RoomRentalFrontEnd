@@ -12,6 +12,7 @@ const OwnerAddRoomModal = () => {
   const [previewRoomImage, setPreviewRoomImage] = useState();
   let history = useHistory();
   const [ErrorMsg, setErrorMsg] = useState();
+  const [ErrorMsgImage, setErrorMsgImage] = useState("");
 
   const [isLoader, setLoader] = useState(false);
   const [OwnnerData, setOwnerData] = useState({
@@ -22,52 +23,60 @@ const OwnerAddRoomModal = () => {
     Colony: "",
     City: "",
     Address: "",
-    Image : ""
+    Image: "",
   });
   const handleChangeOwnerData = (e) => {
     const { name, value } = e.target;
     setOwnerData({ ...OwnnerData, [name]: value });
   };
   const uploadFile = (e) => {
- 
-    if (e.target.files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onloadend = () => {
-        // console.log("reader result", reader.result);
-        setPreviewRoomImage(reader.result);
-        setOwnerData({ ...OwnnerData, ["Image"]: reader.result });
-      };
-    }else{
-      setPreviewRoomImage()
 
+    if (e.target.files[0].type == "image/gif") {
+      setErrorMsgImage("")
+      if (e.target.files[0]) {
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onloadend = () => {
+          // console.log("reader result", reader.result);
+          setPreviewRoomImage(reader.result);
+          setOwnerData({ ...OwnnerData, ["Image"]: reader.result });
+        };
+      }
+    } else {
+      setErrorMsgImage("File type not supported")
+      e.target.files[0].value = ""
+      console.log("change value");
+      setPreviewRoomImage();
     }
   };
   const AddOwnerData = async (event) => {
-    OwnnerData.UserId = OwnerDetailes.userId
-    console.log("model values",OwnnerData)
+    OwnnerData.UserId = OwnerDetailes.userId;
+    console.log("model values", OwnnerData);
     event.preventDefault();
     try {
       if (
-        !OwnnerData.Price  ||
-        !OwnnerData.NumberOfMamber||
+        !OwnnerData.Price ||
+        !OwnnerData.NumberOfMamber ||
         !OwnnerData.State ||
-        !OwnnerData.ZipCode||
-        !OwnnerData.Colony||
-        !OwnnerData.City||
+        !OwnnerData.ZipCode ||
+        !OwnnerData.Colony ||
+        !OwnnerData.City ||
         !OwnnerData.Address
       ) {
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
       }
       setLoader(true);
-      const responce = await axios.post(`https://localhost:44380/AddOwnerData`,OwnnerData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const responce = await axios.post(
+        `https://localhost:44380/AddOwnerData`,
+        OwnnerData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setLoader(false);
-      console.log("add response",responce);
+      console.log("add response", responce);
       setOwnerData({
         Price: "",
         NumberOfMamber: "",
@@ -76,7 +85,7 @@ const OwnerAddRoomModal = () => {
         Colony: "",
         City: "",
         Address: "",
-      })
+      });
     } catch (error) {
       console.log("error", error.responce);
       setLoader(false);
@@ -87,10 +96,11 @@ const OwnerAddRoomModal = () => {
   return (
     <>
       <div
-        className="modal "
-        id="exampleModal"
-        // tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        class="modal"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered  modal-lg">
@@ -135,6 +145,7 @@ const OwnerAddRoomModal = () => {
                 </div>
                 <div className="col-md-7">
                   <form className="g-3">
+                    {ErrorMsgImage}
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-outline mb-2">
@@ -147,7 +158,10 @@ const OwnerAddRoomModal = () => {
                             value={OwnnerData.Price}
                             onChange={handleChangeOwnerData}
                           />
-                          <label className="form-label" htmlFor="form3Example978">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example978"
+                          >
                             Price
                           </label>
                         </div>
@@ -165,7 +179,10 @@ const OwnerAddRoomModal = () => {
                             min={6}
                             max={1}
                           />
-                          <label className="form-label" htmlFor="form3Example97">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example97"
+                          >
                             Number of mambers
                           </label>
                         </div>
@@ -244,11 +261,17 @@ const OwnerAddRoomModal = () => {
                       </label>
                     </div>
                     <div className="form-outline">
+                      {ErrorMsgImage != null && <>
+                      <span className=" text-center text-danger">
+                      {ErrorMsgImage}
+                        </span></>}
                       <input
                         type="file"
                         id="form3Example97"
                         onChange={uploadFile}
                         name="Image"
+                        // value=""
+                        // accept="image/png, image/gif, image/jpeg"
                         className="form-control form-control-lg"
                         placeholder="image"
                       />
@@ -269,12 +292,15 @@ const OwnerAddRoomModal = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary" 
-              //data-bs-dismiss="modal" 
-               disabled={isLoader} 
-               onClick={(event) => {
-                      AddOwnerData(event);
-                    }}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                //data-bs-dismiss="modal"
+                disabled={isLoader}
+                onClick={(event) => {
+                  AddOwnerData(event);
+                }}
+              >
                 {isLoader ? (
                   <>
                     <div
@@ -282,8 +308,8 @@ const OwnerAddRoomModal = () => {
                       role="status"
                     >
                       <span className="visually-hidden">Loading...</span>
-                      
-                    </div> Loading....
+                    </div>{" "}
+                    Loading....
                   </>
                 ) : (
                   <>
