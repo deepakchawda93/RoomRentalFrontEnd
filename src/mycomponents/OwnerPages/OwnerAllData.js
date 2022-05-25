@@ -29,7 +29,7 @@ const OwnerAllData = () => {
       );
       setAllOwnerData(res.data.data);
       setIsLoader(false);
-      // console.log("res data ", res.data.data);
+      // console.log("res data ",res);
     } catch (error) {
       console.log("error", error.res);
     }

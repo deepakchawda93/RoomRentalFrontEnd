@@ -12,8 +12,10 @@ const OwnerAddRoomModal = () => {
   const [previewRoomImage, setPreviewRoomImage] = useState();
   let history = useHistory();
   const [ErrorMsg, setErrorMsg] = useState();
+  const [ImgTypeValid, setImgTypeValid] = useState({
+    ImageName: "",
+  });
   const [ErrorMsgImage, setErrorMsgImage] = useState("");
-
   const [isLoader, setLoader] = useState(false);
   const [OwnnerData, setOwnerData] = useState({
     Price: "",
@@ -30,10 +32,16 @@ const OwnerAddRoomModal = () => {
     setOwnerData({ ...OwnnerData, [name]: value });
   };
   const uploadFile = (e) => {
+    const { name, value } = e.target;
+    setImgTypeValid({ ...ImgTypeValid, [name]: value });
 
-    if (e.target.files[0].type == "image/gif") {
-      setErrorMsgImage("")
-      if (e.target.files[0]) {
+    if (e.target.files[0] != undefined) {
+      setErrorMsgImage("");
+      if (
+        e.target.files[0].type == "image/gif" ||
+        e.target.files[0].type == "image/jpeg" ||
+        e.target.files[0].type == "image/png"
+      ) {
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = () => {
@@ -41,14 +49,17 @@ const OwnerAddRoomModal = () => {
           setPreviewRoomImage(reader.result);
           setOwnerData({ ...OwnnerData, ["Image"]: reader.result });
         };
+      } else {
+        setPreviewRoomImage(undefined);
+        setImgTypeValid({ ImageName: "" });
+        setErrorMsgImage("File type not supported");
       }
     } else {
-      setErrorMsgImage("File type not supported")
-      e.target.files[0].value = ""
-      console.log("change value");
-      setPreviewRoomImage();
+      setPreviewRoomImage(undefined);
     }
   };
+
+
   const AddOwnerData = async (event) => {
     OwnnerData.UserId = OwnerDetailes.userId;
     console.log("model values", OwnnerData);
@@ -61,7 +72,8 @@ const OwnerAddRoomModal = () => {
         !OwnnerData.ZipCode ||
         !OwnnerData.Colony ||
         !OwnnerData.City ||
-        !OwnnerData.Address
+        !OwnnerData.Address ||
+        !OwnnerData.Image
       ) {
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
       }
@@ -162,7 +174,7 @@ const OwnerAddRoomModal = () => {
                             className="form-label"
                             htmlFor="form3Example978"
                           >
-                            Price
+                            Price<span className="text-danger">*</span>
                           </label>
                         </div>
                       </div>
@@ -184,6 +196,7 @@ const OwnerAddRoomModal = () => {
                             htmlFor="form3Example97"
                           >
                             Number of mambers
+                            <span className="text-danger">*</span>
                           </label>
                         </div>
                       </div>
@@ -200,7 +213,7 @@ const OwnerAddRoomModal = () => {
                         placeholder="state"
                       />
                       <label className="form-label" htmlFor="form3Example97">
-                        State
+                        State<span className="text-danger">*</span>
                       </label>
                     </div>
                     <div className="form-outline">
@@ -214,7 +227,7 @@ const OwnerAddRoomModal = () => {
                         value={OwnnerData.ZipCode}
                       />
                       <label className="form-label" htmlFor="form3Example97">
-                        Zip code
+                        Zip code<span className="text-danger">*</span>
                       </label>
                     </div>
                     <div className="form-outline">
@@ -228,7 +241,7 @@ const OwnerAddRoomModal = () => {
                         placeholder="colony"
                       />
                       <label className="form-label" htmlFor="form3Example97">
-                        Colony
+                        Colony<span className="text-danger">*</span>
                       </label>
                     </div>
                     <div className="form-outline">
@@ -242,7 +255,7 @@ const OwnerAddRoomModal = () => {
                         placeholder="city"
                       />
                       <label className="form-label" htmlFor="form3Example97">
-                        City
+                        City<span className="text-danger">*</span>
                       </label>
                     </div>
 
@@ -257,26 +270,29 @@ const OwnerAddRoomModal = () => {
                         placeholder="address"
                       />
                       <label className="form-label" htmlFor="form3Example978">
-                        Address
+                        Address<span className="text-danger">*</span>
                       </label>
                     </div>
                     <div className="form-outline">
-                      {ErrorMsgImage != null && <>
-                      <span className=" text-center text-danger">
-                      {ErrorMsgImage}
-                        </span></>}
+                      {ErrorMsgImage != null && (
+                        <>
+                          <span className=" text-center text-danger">
+                            {ErrorMsgImage}
+                          </span>
+                        </>
+                      )}
                       <input
                         type="file"
                         id="form3Example97"
                         onChange={uploadFile}
-                        name="Image"
-                        // value=""
-                        // accept="image/png, image/gif, image/jpeg"
+                        name="ImageName"
+                        value={ImgTypeValid.ImageName}
+                        accept="image/png, image/gif, image/jpeg"
                         className="form-control form-control-lg"
                         placeholder="image"
                       />
                       <label className="form-label" htmlFor="form3Example97">
-                        Image
+                        Image<span className="text-danger">*</span>
                       </label>
                     </div>
                   </form>
