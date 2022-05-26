@@ -25,7 +25,7 @@ const OwnerAddRoomModal = () => {
     Colony: "",
     City: "",
     Address: "",
-    Image: "",
+    ImageFile: "",
   });
   const handleChangeOwnerData = (e) => {
     const { name, value } = e.target;
@@ -33,7 +33,7 @@ const OwnerAddRoomModal = () => {
   };
   const uploadFile = (e) => {
     const { name, value } = e.target;
-    setImgTypeValid({ ...ImgTypeValid, [name]: value });
+    setImgTypeValid({ ...ImgTypeValid, [name]: value});
 
     if (e.target.files[0] != undefined) {
       setErrorMsgImage("");
@@ -47,7 +47,8 @@ const OwnerAddRoomModal = () => {
         reader.onloadend = () => {
           // console.log("reader result", reader.result);
           setPreviewRoomImage(reader.result);
-          setOwnerData({ ...OwnnerData, ["Image"]: reader.result });
+          // setOwnerData({ ...OwnnerData, ["Image"]: reader.result });
+          setOwnerData({ ...OwnnerData, ["ImageFile"]: e.target.files[0]});
         };
       } else {
         setPreviewRoomImage(undefined);
@@ -72,8 +73,8 @@ const OwnerAddRoomModal = () => {
         !OwnnerData.ZipCode ||
         !OwnnerData.Colony ||
         !OwnnerData.City ||
-        !OwnnerData.Address ||
-        !OwnnerData.Image
+        !OwnnerData.Address 
+        // !OwnnerData.ImageFile
       ) {
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
       }
