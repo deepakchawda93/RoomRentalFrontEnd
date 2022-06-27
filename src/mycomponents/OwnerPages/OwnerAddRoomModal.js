@@ -79,17 +79,36 @@ const OwnerAddRoomModal = () => {
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
       }
       setLoader(true);
-      const responce = await axios.post(
-        `https://localhost:44380/AddOwnerData`,
-        OwnnerData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setLoader(false);
-      console.log("add response", responce);
+
+      // const responce = await axios.post(
+      //   `https://localhost:44380/AddOwnerData`,
+      //   OwnnerData,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+
+      const responce = await fetch(`https://localhost:44380/AddOwnerData`, {
+        method: 'POST',
+        headers: {
+           
+            Authorization: `Bearer ${token}`
+        },
+        body: OwnnerData
+    })
+        .then(response => {
+          
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+
+        console.log("add response", responce);
+      setLoader(false);     
       setOwnerData({
         Price: "",
         NumberOfMamber: "",

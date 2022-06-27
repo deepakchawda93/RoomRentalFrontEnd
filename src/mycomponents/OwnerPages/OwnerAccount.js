@@ -8,7 +8,8 @@ import UserAccountImage from "../../images/ProfessionalImgGirl.jpg";
 import OwnerProfile from "../OwnerPages/OwnerProfile";
 import OwnerAllData from "./OwnerAllData";
 import OwnerPendingData from "../OwnerPages/OwnerPendingData";
-import OwnerSuccessData from "../OwnerPages/OwnerSuccessData";
+import OwnerSuccessData from "./OwnerSuccessData";
+import OwnerRejectedData from "./OwnerRejectedData";
 const OwnerAccount = () => {
   let history = useHistory();
   const [isActive, setActive] = useState(false);
@@ -52,6 +53,12 @@ const OwnerAccount = () => {
               <i className="fas fa-cart-plus"></i> Success Data
             </Link>
             <Link
+              to="/OwnerAccount/rejectedData"
+              className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
+            >
+              <i className="fas fa-cart-plus"></i> Rejected Data
+            </Link>
+            <Link
                data-bs-toggle="modal"
                data-bs-target="#exampleModal2"
               className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
@@ -84,6 +91,9 @@ const OwnerAccount = () => {
             </Route>
             <Route exact path="/OwnerAccount/successData">
               <OwnerSuccessData />
+            </Route>
+            <Route exact path="/OwnerAccount/rejectedData">
+              <OwnerRejectedData />
             </Route>
           </Switch>
         </div>

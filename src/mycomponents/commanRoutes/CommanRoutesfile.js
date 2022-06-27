@@ -9,6 +9,7 @@ import SearchPage from "../SearchPage/SearchPage";
 import Signup from "../signup/Signup";
 import UserAccount from "../OwnerPages/OwnerAccount";
 import OwnerAccount from "../OwnerPages/OwnerAccount";
+import OwnerRejectedData from "../OwnerPages/OwnerRejectedData";
 import UserWishlist from "../userPages/UserWishlist";
 const CommanRoutesfile = ({setCheckLogin1 }) => {
   return (
@@ -37,6 +38,9 @@ const CommanRoutesfile = ({setCheckLogin1 }) => {
           <OwnerAccount/>
         </Route>
         <Route exact path="/OwnerAccount/successData">
+          <OwnerAccount/>
+        </Route>
+        <Route exact path="/OwnerAccount/rejectedData">
           <OwnerAccount/>
         </Route>
         <Route exact path="/userWishlist">

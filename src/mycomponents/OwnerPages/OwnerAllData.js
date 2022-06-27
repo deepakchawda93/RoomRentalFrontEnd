@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../OwnerPages/ownerAccount.css";
+import { Link } from "react-router-dom";
 import newImage from "../../images/RoomImage.jpg";
 import OwnerAddRoomModal from "./OwnerAddRoomModal";
 import notFountOwnerImg from "../../images/notFountOwnerDataImg.svg";
@@ -51,32 +52,32 @@ const OwnerAllData = () => {
           </div>
 
           <div className="col-md-3">
-            <div className="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+            <Link to="/OwnerAccount/pendingData" className="list-group-item list-group-item-action p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
                 <h3 className="fs-2">{allOwnerData?.pendingCount}</h3>
                 <p className="fs-5">Pending</p>
               </div>
               <i className="fa-regular fa-hourglass fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-            </div>
+            </Link>
           </div>
 
           <div className="col-md-3">
-            <div className="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+            <Link to="/OwnerAccount/successData" className="list-group-item list-group-item-action p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
                 <h3 className="fs-2">{allOwnerData?.successCount}</h3>
                 <p className="fs-5">Success</p>
               </div>
               <i className="fa-solid fa-clipboard-check fa-3x primary-text border rounded-full secondary-bg p-3 "></i>
-            </div>
+            </Link>
           </div>
           <div className="col-md-3">
-            <div className="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+            <Link to="/OwnerAccount/rejectedData" className="list-group-item list-group-item-action p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
               <div>
                 <h3 className="fs-2">{allOwnerData?.rejectedCount}</h3>
                 <p className="fs-5">Rejected</p>
               </div>
               <i className="fa-solid fa-ban fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="shadow p-3 bg-white rounded-3">
