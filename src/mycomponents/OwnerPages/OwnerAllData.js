@@ -21,7 +21,7 @@ const OwnerAllData = () => {
     try {
       setIsLoader(true);
       const res = await axios.get(
-        `https://localhost:44380/getOwnerData/${Userid}`,
+        `https://localhost:5001/getOwnerData/${Userid}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ const OwnerAllData = () => {
           </button>
         </div>
 
-        <OwnerAddRoomModal />
+        <OwnerAddRoomModal  GetOwnerAllData={GetOwnerAllData}/>
 
         <div className="row gap-5 justify-content-center justify-content-lg-start my-3">
           <h3 className="fs-4 mb-3">All Owner data</h3>

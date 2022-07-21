@@ -32,7 +32,7 @@ const Login = ({setCheckLogin1}) => {
       ) {
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
       }
-      const responce = await axios.post("https://localhost:44380/login", Login);
+      const responce = await axios.post("https://localhost:5001/login", Login);
       console.log("res display", responce);
       if (responce.data.isSuccess == true) {
         setLoader(false);

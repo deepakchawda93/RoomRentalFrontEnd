@@ -6,7 +6,7 @@ import "../OwnerPages/ownerAccount.css";
 import PreviewRoomImg from "../../images/PreviewRoom.svg";
 import newImage from "../../images/RoomImage.jpg";
 
-const OwnerAddRoomModal = () => {
+const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
   const OwnerDetailes = JSON.parse(localStorage.getItem("userDetails"));
   const token = OwnerDetailes.token;
   const [previewRoomImage, setPreviewRoomImage] = useState();
@@ -19,7 +19,7 @@ const OwnerAddRoomModal = () => {
   const [isLoader, setLoader] = useState(false);
   const [OwnnerData, setOwnerData] = useState({
     Price: "",
-    NumberOfMamber: "",
+    NumberOfMambers: "",
     State: "",
     ZipCode: "",
     Colony: "",
@@ -33,7 +33,7 @@ const OwnerAddRoomModal = () => {
   };
   const uploadFile = (e) => {
     const { name, value } = e.target;
-    setImgTypeValid({ ...ImgTypeValid, [name]: value});
+    setImgTypeValid({ ...ImgTypeValid, [name]: value });
 
     if (e.target.files[0] != undefined) {
       setErrorMsgImage("");
@@ -48,7 +48,7 @@ const OwnerAddRoomModal = () => {
           // console.log("reader result", reader.result);
           setPreviewRoomImage(reader.result);
           // setOwnerData({ ...OwnnerData, ["Image"]: reader.result });
-          setOwnerData({ ...OwnnerData, ["ImageFile"]: e.target.files[0]});
+          setOwnerData({ ...OwnnerData, ["ImageFile"]: e.target.files[0] });
         };
       } else {
         setPreviewRoomImage(undefined);
@@ -60,64 +60,64 @@ const OwnerAddRoomModal = () => {
     }
   };
 
-
   const AddOwnerData = async (event) => {
     OwnnerData.UserId = OwnerDetailes.userId;
-    console.log("model values", OwnnerData);
+    //  console.log("model values", OwnnerData);
     event.preventDefault();
     try {
       if (
         !OwnnerData.Price ||
-        !OwnnerData.NumberOfMamber ||
+        !OwnnerData.NumberOfMambers ||
         !OwnnerData.State ||
         !OwnnerData.ZipCode ||
         !OwnnerData.Colony ||
         !OwnnerData.City ||
-        !OwnnerData.Address 
+        !OwnnerData.Address
         // !OwnnerData.ImageFile
       ) {
         return toast.error("✔ Plz fill all fields!", { theme: "colored" });
       }
       setLoader(true);
 
-      // const responce = await axios.post(
-      //   `https://localhost:44380/AddOwnerData`,
-      //   OwnnerData,
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   }
-      // );
+      const responce = await axios.post(
+        `https://localhost:5001/AddOwnerData`,
+        OwnnerData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      const responce = await fetch(`https://localhost:44380/AddOwnerData`, {
-        method: 'POST',
-        headers: {
-           
-            Authorization: `Bearer ${token}`
-        },
-        body: OwnnerData
-    })
-        .then(response => {
-          
-            return response.json();
-        })
-        .catch(err => {
-            console.log(err);
-        });
-
-
+      // const responce = await fetch(`https://localhost:5001/AddOwnerData`, {
+      //   method: "POST",
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   body: OwnnerData,
+      // })
+      //   .then((response) => {
+      //     return response.json();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      console.log(responce.data)
+      if (responce.data.success == true) {
         console.log("add response", responce);
-      setLoader(false);     
-      setOwnerData({
-        Price: "",
-        NumberOfMamber: "",
-        State: "",
-        ZipCode: "",
-        Colony: "",
-        City: "",
-        Address: "",
-      });
+        setLoader(false);
+        setOwnerData({
+          Price: "",
+          NumberOfMambers: "",
+          State: "",
+          ZipCode: "",
+          Colony: "",
+          City: "",
+          Address: "",
+        });
+        GetOwnerAllData();
+        // toast.success(`${}✔`, { theme: "colored" });
+      }
     } catch (error) {
       console.log("error", error.responce);
       setLoader(false);
@@ -203,8 +203,8 @@ const OwnerAddRoomModal = () => {
                           <input
                             type="number"
                             id="form3Example97"
-                            name="NumberOfMamber"
-                            value={OwnnerData.NumberOfMamber}
+                            name="NumberOfMambers"
+                            value={OwnnerData.NumberOfMambers}
                             onChange={handleChangeOwnerData}
                             className="form-control form-control-lg"
                             placeholder="mambers"

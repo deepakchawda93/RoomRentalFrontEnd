@@ -41,7 +41,7 @@ const Signup = () => {
       }
 
       const responce = await axios.post(
-        "https://localhost:44380/Registration",
+        "https://localhost:5001/Registration",
         signUp
       );
       console.log("eroorr", responce);
