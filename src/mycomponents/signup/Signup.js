@@ -41,7 +41,7 @@ const Signup = () => {
       }
 
       const responce = await axios.post(
-        "https://localhost:5001/Registration",
+        `${process.env.REACT_APP_Api_Url}/Registration`,
         signUp
       );
       console.log("eroorr", responce);

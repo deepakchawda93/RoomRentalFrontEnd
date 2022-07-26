@@ -21,13 +21,14 @@ const OwnerAllData = () => {
     try {
       setIsLoader(true);
       const res = await axios.get(
-        `https://localhost:5001/getOwnerData/${Userid}`,
+        `${process.env.REACT_APP_Api_Url}/getOwnerData/${Userid}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+    //console.log("data",res)
       setAllOwnerData(res.data.data);
       setIsLoader(false);
       // console.log("res data ",res);
@@ -85,12 +86,14 @@ const OwnerAllData = () => {
             className="btn btn-success"
             data-bs-toggle="modal"
              data-bs-target="#staticBackdrop"
+             data-keyboard="false"
+             data-backdrop="static"
           >
             Add Room <i className="fa-solid fa-plus"></i>
           </button>
         </div>
 
-        <OwnerAddRoomModal  GetOwnerAllData={GetOwnerAllData}/>
+        <OwnerAddRoomModal key="12345"  GetOwnerAllData={GetOwnerAllData}/>
 
         <div className="row gap-5 justify-content-center justify-content-lg-start my-3">
           <h3 className="fs-4 mb-3">All Owner data</h3>
@@ -114,11 +117,12 @@ const OwnerAllData = () => {
                         style={{ width: "20rem" }}
                       >
                         <img
-                          src={newImage}
+                          src={item.imageSrc}
                           className="card-img-top w-100 hover-zoom"
                           style={{ maxHeight: "15rem" }}
                           alt="..."
                         />
+                        {/* {item.imageSrc} */}
                         <div className="card-body">
                           <h5 className="card-title">
                             Price :{" "}
@@ -143,7 +147,7 @@ const OwnerAllData = () => {
                               //     : ""
                               // }
                               className={
-                                item.ownerDataStatus == "rejected"
+                                item.x == "rejected"
                                   ? "bg-danger text-white px-2 rounded-2"
                                   : item.ownerDataStatus == "success"
                                   ? "bg-success  text-white px-2 rounded-2"

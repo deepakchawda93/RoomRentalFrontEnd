@@ -50,7 +50,7 @@ const CarouselDesign = () => {
               alt="..."
             />
             <div className="card-body">
-              <h5 className="card-title">Flate</h5>
+              <h5 className="card-title">Flats</h5>
               <p className="card-text">
                 Some quick example 
               </p>

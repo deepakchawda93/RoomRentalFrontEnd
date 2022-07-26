@@ -59,6 +59,7 @@ const OwnerAccount = () => {
               <i className="fas fa-cart-plus"></i> Rejected Data
             </Link>
             <Link
+            to=""
                data-bs-toggle="modal"
                data-bs-target="#exampleModal2"
               className="list-group-item list-group-item-action bg-transparent text-danger fw-bold"

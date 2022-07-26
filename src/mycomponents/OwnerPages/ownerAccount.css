@@ -103,4 +103,9 @@ input[type=number]::-webkit-outer-spin-button {
 .bg-blackNew {
   background-color: rgba(19, 17, 17, 0.87);
 }
-  
+/* .......css for Add room Modal......... */
+  .invalid-field{
+border-color: #dc3545;
+color:  #dc3545;
+background-color: #fff;
+  }

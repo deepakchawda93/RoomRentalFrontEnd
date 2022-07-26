@@ -5,16 +5,16 @@ import axios from "axios";
 import "../OwnerPages/ownerAccount.css";
 import PreviewRoomImg from "../../images/PreviewRoom.svg";
 import newImage from "../../images/RoomImage.jpg";
-
+import $ from "jquery";
 const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
   const OwnerDetailes = JSON.parse(localStorage.getItem("userDetails"));
   const token = OwnerDetailes.token;
   const [previewRoomImage, setPreviewRoomImage] = useState();
   let history = useHistory();
-  const [ErrorMsg, setErrorMsg] = useState();
-  const [ImgTypeValid, setImgTypeValid] = useState({
-    ImageName: "",
-  });
+  // const [ImgTypeValid, setImgTypeValid] = useState({
+  //   ImageName: "",
+  // });
+  const [ErrorMsg, setErrorMsg] = useState({});
   const [ErrorMsgImage, setErrorMsgImage] = useState("");
   const [isLoader, setLoader] = useState(false);
   const [OwnnerData, setOwnerData] = useState({
@@ -26,15 +26,17 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
     City: "",
     Address: "",
     ImageFile: "",
+    ImageName: "",
   });
   const handleChangeOwnerData = (e) => {
     const { name, value } = e.target;
     setOwnerData({ ...OwnnerData, [name]: value });
+    validate()
   };
+
   const uploadFile = (e) => {
     const { name, value } = e.target;
-    setImgTypeValid({ ...ImgTypeValid, [name]: value });
-
+    setOwnerData({ ...OwnnerData, [name]: value });
     if (e.target.files[0] != undefined) {
       setErrorMsgImage("");
       if (
@@ -45,14 +47,16 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = () => {
-          // console.log("reader result", reader.result);
           setPreviewRoomImage(reader.result);
-          // setOwnerData({ ...OwnnerData, ["Image"]: reader.result });
-          setOwnerData({ ...OwnnerData, ["ImageFile"]: e.target.files[0] });
+          setOwnerData({
+            ...OwnnerData,
+            [name]: value,
+            ["ImageFile"]: e.target.files[0],
+          });
         };
       } else {
         setPreviewRoomImage(undefined);
-        setImgTypeValid({ ImageName: "" });
+        setOwnerData({ ImageName: "" });
         setErrorMsgImage("File type not supported");
       }
     } else {
@@ -60,78 +64,119 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
     }
   };
 
+  const validate = () => {
+    let temp = {};
+    temp.Price = OwnnerData.Price == "" ? false : true;
+    temp.NumberOfMambers = OwnnerData.NumberOfMambers == "" ? false : true;
+    temp.State = OwnnerData.State == "" ? false : true;
+    temp.ZipCode = OwnnerData.ZipCode == "" ? false : true;
+    temp.Colony = OwnnerData.Colony == "" ? false : true;
+    temp.City = OwnnerData.City == "" ? false : true;
+    temp.Address = OwnnerData.Address == "" ? false : true;
+    temp.ImageName = OwnnerData.ImageName == "" ? false : true;
+    setErrorMsg(temp);
+
+    return Object.values(temp).every((x) => x == true);
+  };
+
   const AddOwnerData = async (event) => {
-    OwnnerData.UserId = OwnerDetailes.userId;
-    //  console.log("model values", OwnnerData);
-    event.preventDefault();
-    try {
-      if (
-        !OwnnerData.Price ||
-        !OwnnerData.NumberOfMambers ||
-        !OwnnerData.State ||
-        !OwnnerData.ZipCode ||
-        !OwnnerData.Colony ||
-        !OwnnerData.City ||
-        !OwnnerData.Address
-        // !OwnnerData.ImageFile
-      ) {
-        return toast.error("✔ Plz fill all fields!", { theme: "colored" });
-      }
-      setLoader(true);
+    if (validate()) {
+      alert("come insite of funtion");
+      const FormTypeData = new FormData();
+      FormTypeData.append("Price", OwnnerData.Price);
+      FormTypeData.append("NumberOfMambers", OwnnerData.NumberOfMambers);
+      FormTypeData.append("State", OwnnerData.State);
+      FormTypeData.append("ZipCode", OwnnerData.ZipCode);
+      FormTypeData.append("Colony", OwnnerData.Colony);
+      FormTypeData.append("City", OwnnerData.City);
+      FormTypeData.append("Address", OwnnerData.Address);
+      FormTypeData.append("ImageFile", OwnnerData.ImageFile);
+      FormTypeData.append("Image", OwnnerData.ImageName);
+      FormTypeData.append("UserId", OwnerDetailes.userId);
+      event.preventDefault();
 
-      const responce = await axios.post(
-        `https://localhost:5001/AddOwnerData`,
-        OwnnerData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      try {
+        // if (
+        //   !OwnnerData.Price ||
+        //   !OwnnerData.NumberOfMambers ||
+        //   !OwnnerData.State ||
+        //   !OwnnerData.ZipCode ||
+        //   !OwnnerData.Colony ||
+        //   !OwnnerData.City ||
+        //   !OwnnerData.Address ||
+        //   !OwnnerData.ImageName ||
+        //   !OwnnerData.ImageFile
+        // ) {
+        //   return toast.error("✔ Plz fill all fields!", { theme: "colored" });
+        // }
+        setLoader(true);
+        const responce = await axios.post(
+          `${process.env.REACT_APP_Api_Url}/AddOwnerData`,
+          FormTypeData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // const responce = await fetch(`${Api_Url}/AddOwnerData`, {
+        //   method: "POST",
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        //   body: OwnnerData,
+        // })
+        //   .then((response) => {
+        //     return response.json();
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
+        console.log(responce.data);
+        if (responce.data.success == true) {
+          $("#staticBackdrop").on("hidden.bs.modal", function () {
+            // // Load up a new modal...
+            // $('#myModalNew').modal('show')
+          });
+          setLoader(false);
+          setOwnerData({
+            Price: "",
+            NumberOfMambers: "",
+            State: "",
+            ZipCode: "",
+            Colony: "",
+            City: "",
+            Address: "",
+            ImageName: "",
+            ImageFile: null,
+          });
+          // setImgTypeValid({
+          //   ImageName: "",
+          // });
+          setPreviewRoomImage(undefined);
+          toast.success(`${responce.data.msg}✔`, { theme: "colored" });
+          GetOwnerAllData();
         }
-      );
-
-      // const responce = await fetch(`https://localhost:5001/AddOwnerData`, {
-      //   method: "POST",
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   body: OwnnerData,
-      // })
-      //   .then((response) => {
-      //     return response.json();
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      console.log(responce.data)
-      if (responce.data.success == true) {
-        console.log("add response", responce);
+      } catch (error) {
+        console.log("error", error.responce);
         setLoader(false);
-        setOwnerData({
-          Price: "",
-          NumberOfMambers: "",
-          State: "",
-          ZipCode: "",
-          Colony: "",
-          City: "",
-          Address: "",
-        });
-        GetOwnerAllData();
-        // toast.success(`${}✔`, { theme: "colored" });
+        toast.error("something went wrong !", { theme: "colored" });
       }
-    } catch (error) {
-      console.log("error", error.responce);
-      setLoader(false);
-      toast.error("something went wrong !", { theme: "colored" });
     }
   };
+  // run time adding  class
+  const applyErrorClass = (field) =>
+    field in ErrorMsg && ErrorMsg[field] == false ? " invalid-field" : "";
+  // console.log("print", ErrorMsg);
 
   return (
     <>
       <div
-        class="modal"
+        className="modal fade"
         id="staticBackdrop"
         data-bs-backdrop="static"
-        tabindex="-1"
+        tabIndex="-1"
+        role="dialog"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
@@ -176,124 +221,221 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                   )}
                 </div>
                 <div className="col-md-7">
-                  <form className="g-3">
-                    {ErrorMsgImage}
+                  <form
+                    className="g-3"
+                    // onSubmit={(event) => {
+                    //    AddOwnerData(event);
+                    //   }}
+                  >
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-outline mb-2">
-                          <input
-                            type="number"
-                            id="form3Example978"
-                            name="Price"
-                            className="form-control form-control-lg"
-                            placeholder="Enter Price"
-                            value={OwnnerData.Price}
-                            onChange={handleChangeOwnerData}
-                          />
+                        <div className="form-outline ">
                           <label
                             className="form-label"
-                            htmlFor="form3Example978"
+                            htmlFor="form3Example972"
                           >
                             Price<span className="text-danger">*</span>
                           </label>
+                          <input
+                            type="number"
+                            id="form3Example971"
+                            name="Price"
+                            placeholder="Enter Price"
+                            value={OwnnerData.Price}
+                            className={
+                              "form-control form-control-lg" +
+                              applyErrorClass("Price")
+                            }
+                            onChange={handleChangeOwnerData}
+                          />
+                          {ErrorMsg.Price == false && (
+                            <>
+                              <span className="text-center text-danger">
+                                Required
+                              </span>
+                            </>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-outline">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example974"
+                          >
+                            Number of members
+                            <span className="text-danger">*</span>
+                          </label>
                           <input
                             type="number"
-                            id="form3Example97"
+                            id="form3Example973"
                             name="NumberOfMambers"
                             value={OwnnerData.NumberOfMambers}
                             onChange={handleChangeOwnerData}
-                            className="form-control form-control-lg"
+                            className={
+                              "form-control form-control-lg" +
+                              applyErrorClass("NumberOfMambers")
+                            }
                             placeholder="mambers"
                             min={6}
                             max={1}
                           />
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example97"
-                          >
-                            Number of mambers
-                            <span className="text-danger">*</span>
-                          </label>
+                          {ErrorMsg.NumberOfMambers == false && (
+                            <>
+                              <span className=" text-center text-danger">
+                                Required
+                              </span>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
 
                     <div className="form-outline">
+                      <label className="form-label" htmlFor="form3Example976">
+                        State<span className="text-danger">*</span>
+                      </label>
                       <input
                         type="text"
-                        id="form3Example97"
+                        id="form3Example975"
                         name="State"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.State}
-                        className="form-control form-control-lg"
+                        className={
+                          "form-control form-control-lg" +
+                          applyErrorClass("State")
+                        }
                         placeholder="state"
                       />
-                      <label className="form-label" htmlFor="form3Example97">
-                        State<span className="text-danger">*</span>
-                      </label>
+                      {ErrorMsg.State == false && (
+                        <>
+                          <span className=" text-center text-danger">
+                            Required
+                          </span>
+                        </>
+                      )}
                     </div>
                     <div className="form-outline">
+                      <label className="form-label" htmlFor="form3Example978">
+                        Zip code<span className="text-danger">*</span>
+                      </label>
                       <input
                         type="number"
-                        id="form3Example97"
+                        id="form3Example977"
                         name="ZipCode"
                         onChange={handleChangeOwnerData}
-                        className="form-control form-control-lg"
+                        className={
+                          "form-control form-control-lg" +
+                          applyErrorClass("ZipCode")
+                        }
                         placeholder="zip code"
                         value={OwnnerData.ZipCode}
                       />
-                      <label className="form-label" htmlFor="form3Example97">
-                        Zip code<span className="text-danger">*</span>
-                      </label>
+                      {ErrorMsg.ZipCode == false && (
+                        <>
+                          <span className=" text-center text-danger">
+                            Required
+                          </span>
+                        </>
+                      )}
                     </div>
                     <div className="form-outline">
+                      <label className="form-label" htmlFor="form3Example980">
+                        Colony<span className="text-danger">*</span>
+                      </label>
                       <input
                         type="email"
-                        id="form3Example97"
+                        id="form3Example979"
                         name="Colony"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.Colony}
-                        className="form-control form-control-lg"
+                        className={
+                          "form-control form-control-lg" +
+                          applyErrorClass("Colony")
+                        }
                         placeholder="colony"
                       />
-                      <label className="form-label" htmlFor="form3Example97">
-                        Colony<span className="text-danger">*</span>
-                      </label>
+                      {ErrorMsg.Colony == false && (
+                        <>
+                          <span className=" text-center text-danger">
+                            Required
+                          </span>
+                        </>
+                      )}
                     </div>
                     <div className="form-outline">
+                      <label className="form-label" htmlFor="form3Example982">
+                        City<span className="text-danger">*</span>
+                      </label>
                       <input
                         type="email"
-                        id="form3Example97"
+                        id="form3Example981"
                         name="City"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.City}
-                        className="form-control form-control-lg"
+                        className={
+                          "form-control form-control-lg" +
+                          applyErrorClass("City")
+                        }
                         placeholder="city"
                       />
-                      <label className="form-label" htmlFor="form3Example97">
-                        City<span className="text-danger">*</span>
-                      </label>
+                      {ErrorMsg.City == false && (
+                        <>
+                          <span className=" text-center text-danger">
+                            Required
+                          </span>
+                        </>
+                      )}
                     </div>
 
-                    <div className="form-outline mb-2">
+                    <div className="form-outline">
+                      <label className="form-label" htmlFor="form3Example984">
+                        Address<span className="text-danger">*</span>
+                      </label>
                       <input
                         type="text"
-                        id="form3Example978"
+                        id="form3Example983"
                         name="Address"
                         onChange={handleChangeOwnerData}
                         value={OwnnerData.Address}
-                        className="form-control form-control-lg"
+                        className={
+                          "form-control form-control-lg" +
+                          applyErrorClass("Address")
+                        }
                         placeholder="address"
                       />
-                      <label className="form-label" htmlFor="form3Example978">
-                        Address<span className="text-danger">*</span>
-                      </label>
+                      {ErrorMsg.Address == false && (
+                        <>
+                          <span className=" text-center text-danger">
+                            Required
+                          </span>
+                        </>
+                      )}
                     </div>
                     <div className="form-outline">
+                      <label className="form-label" htmlFor="form3Example986">
+                        Image<span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="file"
+                        id="form3Example985"
+                        onChange={uploadFile}
+                        name="ImageName"
+                        value={OwnnerData.ImageName}
+                        accept="image/png, image/gif, image/jpeg"
+                        className={
+                          "form-control form-control-lg" +
+                          applyErrorClass("ImageName")
+                        }
+                        placeholder="image"
+                      />
+                      {ErrorMsg.ImageName == false && (
+                        <>
+                          <span className=" text-center text-danger">
+                            Required
+                          </span>
+                        </>
+                      )}
                       {ErrorMsgImage != null && (
                         <>
                           <span className=" text-center text-danger">
@@ -301,19 +443,6 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                           </span>
                         </>
                       )}
-                      <input
-                        type="file"
-                        id="form3Example97"
-                        onChange={uploadFile}
-                        name="ImageName"
-                        value={ImgTypeValid.ImageName}
-                        accept="image/png, image/gif, image/jpeg"
-                        className="form-control form-control-lg"
-                        placeholder="image"
-                      />
-                      <label className="form-label" htmlFor="form3Example97">
-                        Image<span className="text-danger">*</span>
-                      </label>
                     </div>
                   </form>
                 </div>
@@ -331,11 +460,12 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
               <button
                 type="button"
                 className="btn btn-primary"
-                //data-bs-dismiss="modal"
-                disabled={isLoader}
+                id="savedata"
                 onClick={(event) => {
                   AddOwnerData(event);
                 }}
+                //data-bs-dismiss="modal"
+                disabled={isLoader}
               >
                 {isLoader ? (
                   <>
