@@ -28,12 +28,34 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
     ImageFile: "",
     ImageName: "",
   });
+
   const handleChangeOwnerData = (e) => {
     const { name, value } = e.target;
     setOwnerData({ ...OwnnerData, [name]: value });
-    validate()
+    if (!Object.keys(ErrorMsg).length == 0) {
+      console.log("insite handle error");
+      validate();
+    }
+  };
+  const validate = () => {
+    console.log("insite of validate ");
+    let temp = {};
+    temp.Price = OwnnerData.Price == "" ? false : true;
+    temp.NumberOfMambers = OwnnerData.NumberOfMambers == "" ? false : true;
+    temp.State = OwnnerData.State == "" ? false : true;
+    temp.ZipCode = OwnnerData.ZipCode == "" ? false : true;
+    temp.Colony = OwnnerData.Colony == "" ? false : true;
+    temp.City = OwnnerData.City == "" ? false : true;
+    temp.Address = OwnnerData.Address == "" ? false : true;
+    temp.ImageName = OwnnerData.ImageName == "" ? false : true;
+    setErrorMsg(temp);
+
+    return Object.values(temp).every((x) => x == true);
   };
 
+  console.log("Error msg ", ErrorMsg);
+  console.log("initial log", OwnnerData);
+  // Upload image
   const uploadFile = (e) => {
     const { name, value } = e.target;
     setOwnerData({ ...OwnnerData, [name]: value });
@@ -63,22 +85,6 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
       setPreviewRoomImage(undefined);
     }
   };
-
-  const validate = () => {
-    let temp = {};
-    temp.Price = OwnnerData.Price == "" ? false : true;
-    temp.NumberOfMambers = OwnnerData.NumberOfMambers == "" ? false : true;
-    temp.State = OwnnerData.State == "" ? false : true;
-    temp.ZipCode = OwnnerData.ZipCode == "" ? false : true;
-    temp.Colony = OwnnerData.Colony == "" ? false : true;
-    temp.City = OwnnerData.City == "" ? false : true;
-    temp.Address = OwnnerData.Address == "" ? false : true;
-    temp.ImageName = OwnnerData.ImageName == "" ? false : true;
-    setErrorMsg(temp);
-
-    return Object.values(temp).every((x) => x == true);
-  };
-
   const AddOwnerData = async (event) => {
     if (validate()) {
       alert("come insite of funtion");
@@ -246,11 +252,11 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                               "form-control form-control-lg" +
                               applyErrorClass("Price")
                             }
-                            onChange={handleChangeOwnerData}
+                            onInput={handleChangeOwnerData}
                           />
                           {ErrorMsg.Price == false && (
                             <>
-                              <span className="text-center text-danger">
+                              <span className="text-center text-danger txtEnd">
                                 Required
                               </span>
                             </>
@@ -282,7 +288,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                           />
                           {ErrorMsg.NumberOfMambers == false && (
                             <>
-                              <span className=" text-center text-danger">
+                              <span className=" text-center text-danger txtEnd">
                                 Required
                               </span>
                             </>
@@ -309,7 +315,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                       />
                       {ErrorMsg.State == false && (
                         <>
-                          <span className=" text-center text-danger">
+                          <span className=" text-center text-danger txtEnd">
                             Required
                           </span>
                         </>
@@ -333,7 +339,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                       />
                       {ErrorMsg.ZipCode == false && (
                         <>
-                          <span className=" text-center text-danger">
+                          <span className=" text-center text-danger txtEnd">
                             Required
                           </span>
                         </>
@@ -357,7 +363,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                       />
                       {ErrorMsg.Colony == false && (
                         <>
-                          <span className=" text-center text-danger">
+                          <span className=" text-center text-danger txtEnd">
                             Required
                           </span>
                         </>
@@ -381,7 +387,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                       />
                       {ErrorMsg.City == false && (
                         <>
-                          <span className=" text-center text-danger">
+                          <span className=" text-center text-danger txtEnd">
                             Required
                           </span>
                         </>
@@ -406,7 +412,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                       />
                       {ErrorMsg.Address == false && (
                         <>
-                          <span className=" text-center text-danger">
+                          <span className=" text-center text-danger txtEnd">
                             Required
                           </span>
                         </>
@@ -431,14 +437,14 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                       />
                       {ErrorMsg.ImageName == false && (
                         <>
-                          <span className=" text-center text-danger">
+                          <span className=" text-center text-danger txtEnd">
                             Required
                           </span>
                         </>
                       )}
                       {ErrorMsgImage != null && (
                         <>
-                          <span className=" text-center text-danger">
+                          <span className=" text-center text-danger txtEnd">
                             {ErrorMsgImage}
                           </span>
                         </>

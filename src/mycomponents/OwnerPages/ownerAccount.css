@@ -109,3 +109,8 @@ border-color: #dc3545;
 color:  #dc3545;
 background-color: #fff;
   }
+  .txtEnd{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
