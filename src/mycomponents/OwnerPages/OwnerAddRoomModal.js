@@ -184,9 +184,8 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
     }
   };
   // run time adding  class
-  const applyErrorClass = (field) =>{
+  const applyErrorClass = (field) =>
     field in ErrorMsg && ErrorMsg[field] == false ? " invalid-field" : "";
-  }
 
   const clearModalData = () => {
     setOwnerData({
