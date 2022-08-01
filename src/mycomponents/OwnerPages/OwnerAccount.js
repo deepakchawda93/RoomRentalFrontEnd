@@ -44,19 +44,19 @@ const OwnerAccount = () => {
               to="/OwnerAccount/pendingData"
               className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
             >
-              <i className="fas fa-cart-plus"></i> Pending Data
+              <i class="fa-regular fa-hourglass-half"></i> Pending Data
             </Link>
             <Link
               to="/OwnerAccount/successData"
               className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
             >
-              <i className="fas fa-cart-plus"></i> Success Data
+              <i class="fa-solid fa-clipboard-check"></i> Success Data
             </Link>
             <Link
               to="/OwnerAccount/rejectedData"
               className="list-group-item list-group-item-action bg-transparent second-text fw-bold"
             >
-              <i className="fas fa-cart-plus"></i> Rejected Data
+              <i class="fa-solid fa-ban"></i> Rejected Data
             </Link>
             <Link
             to=""

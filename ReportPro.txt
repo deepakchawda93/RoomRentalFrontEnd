@@ -1,0 +1,1 @@
+1.) here is a ErrorMsg is a useState =>  Object.values(ErrorMsg).every((x) => x == true)

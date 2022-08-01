@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import "../OwnerPages/ownerAccount.css";
 import PreviewRoomImg from "../../images/PreviewRoom.svg";
 import newImage from "../../images/RoomImage.jpg";
-import $ from "jquery";
+
 const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
   const OwnerDetailes = JSON.parse(localStorage.getItem("userDetails"));
   const token = OwnerDetailes.token;
@@ -28,37 +28,67 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
     ImageFile: "",
     ImageName: "",
   });
-
   const handleChangeOwnerData = (e) => {
     const { name, value } = e.target;
     setOwnerData({ ...OwnnerData, [name]: value });
-    if (!Object.keys(ErrorMsg).length == 0) {
-      console.log("insite handle error");
-      validate();
+    if (!Object.keys(ErrorMsg).length == 0 && !value.trim().length == 0) {
+      setErrorMsg({ ...ErrorMsg, [name]: true });
     }
   };
+  // there is a two option to update modal value at a run time
+  // useEffect(() => {
+  //   if (!Object.keys(ErrorMsg).length == 0) {
+  //     console.log("insite useEffect", OwnnerData);
+  //     validate();
+  //   }
+  // }, [OwnnerData]);
   const validate = () => {
-    console.log("insite of validate ");
+    // debugger
     let temp = {};
-    temp.Price = OwnnerData.Price == "" ? false : true;
-    temp.NumberOfMambers = OwnnerData.NumberOfMambers == "" ? false : true;
-    temp.State = OwnnerData.State == "" ? false : true;
-    temp.ZipCode = OwnnerData.ZipCode == "" ? false : true;
-    temp.Colony = OwnnerData.Colony == "" ? false : true;
-    temp.City = OwnnerData.City == "" ? false : true;
-    temp.Address = OwnnerData.Address == "" ? false : true;
-    temp.ImageName = OwnnerData.ImageName == "" ? false : true;
+    temp.Price =
+      OwnnerData.Price == "" || OwnnerData.Price.trim().length == 0
+        ? false
+        : true;
+    temp.NumberOfMambers =
+      OwnnerData.NumberOfMambers == "" ||
+      OwnnerData.NumberOfMambers.trim().length == 0
+        ? false
+        : true;
+    temp.State =
+      OwnnerData.State == "" || OwnnerData.State.trim().length == 0
+        ? false
+        : true;
+    temp.ZipCode =
+      OwnnerData.ZipCode == "" || OwnnerData.ZipCode.trim().length == 0
+        ? false
+        : true;
+    temp.Colony =
+      OwnnerData.Colony == "" || OwnnerData.Colony.trim().length == 0
+        ? false
+        : true;
+    temp.City =
+      OwnnerData.City == "" || OwnnerData.City.trim().length == 0
+        ? false
+        : true;
+    temp.Address =
+      OwnnerData.Address == "" || OwnnerData.Address.trim().length == 0
+        ? false
+        : true;
+    temp.ImageName =
+      OwnnerData.ImageName == "" || OwnnerData.ImageName.trim().length == 0
+        ? false
+        : true;
     setErrorMsg(temp);
-
     return Object.values(temp).every((x) => x == true);
   };
 
-  console.log("Error msg ", ErrorMsg);
-  console.log("initial log", OwnnerData);
   // Upload image
   const uploadFile = (e) => {
     const { name, value } = e.target;
     setOwnerData({ ...OwnnerData, [name]: value });
+    if (!Object.keys(ErrorMsg).length == 0) {
+      setErrorMsg({ ...ErrorMsg, [name]: true });
+    }
     if (e.target.files[0] != undefined) {
       setErrorMsgImage("");
       if (
@@ -83,11 +113,11 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
       }
     } else {
       setPreviewRoomImage(undefined);
+      // setErrorMsg({...ErrorMsg, [name]:false})
     }
   };
   const AddOwnerData = async (event) => {
     if (validate()) {
-      alert("come insite of funtion");
       const FormTypeData = new FormData();
       FormTypeData.append("Price", OwnnerData.Price);
       FormTypeData.append("NumberOfMambers", OwnnerData.NumberOfMambers);
@@ -100,21 +130,8 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
       FormTypeData.append("Image", OwnnerData.ImageName);
       FormTypeData.append("UserId", OwnerDetailes.userId);
       event.preventDefault();
-
+      setErrorMsg({});
       try {
-        // if (
-        //   !OwnnerData.Price ||
-        //   !OwnnerData.NumberOfMambers ||
-        //   !OwnnerData.State ||
-        //   !OwnnerData.ZipCode ||
-        //   !OwnnerData.Colony ||
-        //   !OwnnerData.City ||
-        //   !OwnnerData.Address ||
-        //   !OwnnerData.ImageName ||
-        //   !OwnnerData.ImageFile
-        // ) {
-        //   return toast.error("✔ Plz fill all fields!", { theme: "colored" });
-        // }
         setLoader(true);
         const responce = await axios.post(
           `${process.env.REACT_APP_Api_Url}/AddOwnerData`,
@@ -140,10 +157,6 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
         //   });
         console.log(responce.data);
         if (responce.data.success == true) {
-          $("#staticBackdrop").on("hidden.bs.modal", function () {
-            // // Load up a new modal...
-            // $('#myModalNew').modal('show')
-          });
           setLoader(false);
           setOwnerData({
             Price: "",
@@ -171,22 +184,52 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
     }
   };
   // run time adding  class
-  const applyErrorClass = (field) =>
+  const applyErrorClass = (field) =>{
     field in ErrorMsg && ErrorMsg[field] == false ? " invalid-field" : "";
-  // console.log("print", ErrorMsg);
+  }
 
+  const clearModalData = () => {
+    setOwnerData({
+      Price: "",
+      NumberOfMambers: "",
+      State: "",
+      ZipCode: "",
+      Colony: "",
+      City: "",
+      Address: "",
+      ImageName: "",
+      ImageFile: null,
+    });
+    setPreviewRoomImage(undefined);
+    setErrorMsg({});
+    // if (!Object.keys(ErrorMsg).length == 0) {
+    //   console.log("come in site", ErrorMsg);
+    //   setErrorMsg({
+    //     Price: true,
+    //     NumberOfMambers: true,
+    //     State: true,
+    //     ZipCode: true,
+    //     Colony: true,
+    //     City: true,
+    //     Address: true,
+    //     ImageName: true,
+    //   });
+    // }
+   
+  };
+  console.log(Object.values(OwnnerData).every((x) => x != ""))
   return (
     <>
       <div
         className="modal fade"
-        id="staticBackdrop"
+        id="OwnerAddDataModal"
         data-bs-backdrop="static"
         tabIndex="-1"
         role="dialog"
-        aria-labelledby="staticBackdropLabel"
+        // aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered  modal-lg">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
@@ -195,6 +238,9 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
               <button
                 type="button"
                 className="btn-close"
+                onClick={() => {
+                  clearModalData();
+                }}
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 disabled={isLoader}
@@ -252,7 +298,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                               "form-control form-control-lg" +
                               applyErrorClass("Price")
                             }
-                            onInput={handleChangeOwnerData}
+                            onChange={handleChangeOwnerData}
                           />
                           {ErrorMsg.Price == false && (
                             <>
@@ -350,7 +396,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                         Colony<span className="text-danger">*</span>
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         id="form3Example979"
                         name="Colony"
                         onChange={handleChangeOwnerData}
@@ -374,7 +420,7 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                         City<span className="text-danger">*</span>
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         id="form3Example981"
                         name="City"
                         onChange={handleChangeOwnerData}
@@ -459,18 +505,26 @@ const OwnerAddRoomModal = ({ GetOwnerAllData }) => {
                 type="button"
                 className="btn btn-danger"
                 data-bs-dismiss="modal"
+                onClick={() => {
+                  clearModalData();
+                }}
                 disabled={isLoader}
               >
                 Close
               </button>
+
               <button
                 type="button"
                 className="btn btn-primary"
-                id="savedata"
+                data-bs-dismiss={
+                  Object.values(OwnnerData).every((x) => x != "")
+                    ? "modal"
+                    : " "
+                }
                 onClick={(event) => {
                   AddOwnerData(event);
                 }}
-                //data-bs-dismiss="modal"
+                //data-bs-dismiss=""
                 disabled={isLoader}
               >
                 {isLoader ? (

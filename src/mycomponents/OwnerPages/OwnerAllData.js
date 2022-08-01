@@ -85,7 +85,7 @@ const OwnerAllData = () => {
           <button
             className="btn btn-success"
             data-bs-toggle="modal"
-             data-bs-target="#staticBackdrop"
+             data-bs-target="#OwnerAddDataModal"
              data-keyboard="false"
              data-backdrop="static"
           >
@@ -119,7 +119,7 @@ const OwnerAllData = () => {
                         <img
                           src={item.imageSrc}
                           className="card-img-top w-100 hover-zoom"
-                          style={{ maxHeight: "15rem" }}
+                          style={{ height: "240px"}}
                           alt="..."
                         />
                         {/* {item.imageSrc} */}
